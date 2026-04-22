@@ -6,7 +6,7 @@ Este documento establece las reglas de convivencia, comunicación y estándares 
 | Nombre | Rol | Usuario de GitHub |
 | :--- | :--- | :--- |
 | [jose gabriel roa diaz] | Líder (Arquitecto) | `@jogard24` |
-| [Nombre del Aprendiz 2] | Desarrollador | `@usuario2` |
+| [Juan David Caceres Hernandez] | Desarrollador | `@Javid495` |
 | [Nombre del Aprendiz 3] | Desarrollador | `@usuario3` |
 
 ## 2. Canales de Comunicación
