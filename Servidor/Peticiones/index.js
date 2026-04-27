@@ -5,8 +5,8 @@ export const BuscarNombre = async (nombre) =>{
     const user = await request("users");
     
         // Se valida que el usuario este en la base de datos
-         const usersExiste = user.find(u => u.name.toLowerCase() === nombre.toLowerCase());
+        const usersExiste = user.find(u => u.name.toLowerCase() === nombre.toLowerCase());
         
-         //Retornamo un valor booleano
-         return usersExiste ? true:false;
+        //Retornamo un valor booleano
+        return usersExiste ? true:false;
 }

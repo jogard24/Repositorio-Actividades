@@ -389,4 +389,3 @@ document.addEventListener('DOMContentLoaded', function() {
  * 7. Agregar emojis o reacciones a los mensajes
  * 8. Implementar búsqueda/filtrado de mensajes
  */
-
