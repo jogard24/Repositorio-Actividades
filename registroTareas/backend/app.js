@@ -13,7 +13,7 @@ formUsuario.addEventListener("submit", async (e) => {
   const id = document.getElementById("userId").value;//obtenemos el id ingresado
 
   //consultamos al jsonplaceholder
-  const usuario = await request(`https://jsonplaceholder.typicode.com/users/${id}`);
+  const usuario = await request(`http://localhost:3000/users/${id}`);
 
   //si el usuario existe muestra sus datos
   if (usuario.id) {
