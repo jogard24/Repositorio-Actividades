@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Gestion de usuarios y tareas</title>
+</head>
+<body>
+    <div class="container">
+    <h2>Gestión de Usuarios y Tareas</h2>
+
+    <!-- Buscar usuario -->
+    <div class="bloque">
+        <input type="text" id="buscarUsuarioTabla" placeholder="Ingrese usuario">
+        <button id="btnBuscarTabla">Buscar</button>
+    </div>
+
+    <!-- Info usuario -->
+    <div id="infoUsuarioTabla" class="info"></div>
+
+    <hr>
+
+    <!-- Agregar tarea -->
+    <div class="bloque">
+        <input type="text" id="tareaInputTabla" placeholder="Nueva tarea">
+        <button id="btnAgregarTabla">Agregar tarea</button>
+    </div>
+
+    <!-- Tabla -->
+    <div class="tabla-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tarea</th>
+                </tr>
+            </thead>
+            <tbody id="tablaTareasTabla"></tbody>
+        </table>
+    </div>
+    <!-- Mensajes -->
+    <p id="mensajeTabla" class="mensaje"></p>
+
+
+    <script src="../Servidor/GestionUserTareas.js" type="module"></script>
+    
+</body>
+</html>
