@@ -182,6 +182,15 @@ body {
 
 .form__group {
     margin-bottom: var(--spacing-lg);
+    display: none;
+}
+
+.form__index{
+    margin-bottom: var(--spacing-lg);
+}
+
+.form__id{
+    display: contents;
 }
 
 .form__label {
@@ -279,6 +288,11 @@ body {
 .btn--primary:focus-visible {
     box-shadow: 0 0 0 3px var(--color-primary-lighter);
 }
+
+.btn--secundary{
+   display: none;
+}
+
 
 .btn__icon {
     font-size: var(--font-size-lg);
