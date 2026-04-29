@@ -269,7 +269,7 @@ async function createMessageElement(userName) {
     hideEmptyState();
 }
 
-async function createTarjetas(Datos) {
+async function createTarjetas() {
     
     // PASO 1: Crear el contenedor principal del mensaje
     
@@ -284,12 +284,13 @@ async function createTarjetas(Datos) {
         const div = document.createElement("div");
     
         // Asignar la clase 'message-card'
-        div.classList.add("message-card")
-        
+        div.classList.add("message-card");
+        div.classList.add(`tarea`);
+
         div.innerHTML = `
             <div class="message-card__header">
                 <div class="message-card__user">
-                    <div class="message-card__avatar">T</div>
+                    <div class="message-card__avatar">Nueva Tarea</div>
                     <span class="message-card__username">${userNameInput.value}</span>
                 </div>
                 <span class="message-card__timestamp">${fecha}</span>
@@ -372,6 +373,7 @@ async function AgregarTarjetas (event){
         alert("no se añadieron los datos correctamente")
     }
 
+    createTarjetas();
     
 }
 
