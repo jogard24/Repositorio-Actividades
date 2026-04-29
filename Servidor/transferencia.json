@@ -65,10 +65,11 @@
     },
     {
       "name": "Ana Torres",
-      "tarea": "hola",
+      "tarea": "hola me mandas la respuesta que quiero?",
       "body": "como andas",
       "active": false,
-      "id": "M88dGRzcStA"
+      "id": "M88dGRzcStA",
+      "title": "hola actualizas?"
     },
     {
       "name": "Carlos Gómez",

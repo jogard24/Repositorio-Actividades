@@ -1,7 +1,8 @@
 import { request } from "./helper/fetch.js"
-import { BuscarNombre, obtenerTareasPorUsuario } from "./Peticiones/index.js"
+import { BuscarNombre, obtenerTareasPorUsuario, BuscarIdTarea } from "./Peticiones/index.js"
 import { agregarNuevaTarea } from "./Peticiones/AgregarT.js"
 import { eliminarTareaPorId } from "./Peticiones/BorrarTarea.js"
+import { updateTarea } from "./helper/Update.js";
 
 // ============================================
 // 1. SELECCIÓN DE ELEMENTOS DEL DOM
@@ -22,9 +23,13 @@ const userNameInput = document.getElementById('userName');
 const userMessageInput = document.getElementById('userMessage');
 const userDesripcionInput = document.getElementById('UserDescripcion');
 const conjuntoDatos = document.querySelector(".form__group");
+
 const Deleteid = document.querySelector("#Deleteid");
-const aparecerDelete = document.querySelector("#aparecerDelete")
-const Updateid = document.querySelector("updateid");
+const aparecerDelete = document.querySelector("#aparecerDelete");
+
+const Updateid = document.querySelector("#updateid");
+const ActualizarT = document.querySelector("#ActualizarT");
+
 const aparecerUpdate = document.querySelector("#aparecerUpdate")
 // Botón de envío
 const submitBtn = document.getElementById('submitBtnid');
@@ -369,10 +374,14 @@ async function handleFormSubmit(event) {
     //mostrar los campos habilitados
     conjuntoDatos.classList.add("form__id");
     aparecerDelete.classList.add("form__id");
+    aparecerUpdate.classList.add("form__id");
     
     //Mostar boton subir tareas
     submitBtnTareas.classList.remove("btn--secundary");
     submitBtnTareas.classList.add("btn--primary");
+
+    updateBtn.classList.add("btn--primary");
+    updateBtn.classList.remove("btn--secundary");
 
     //Mostar boton eliminar tareas
     deleteBtn.classList.remove("btn--secundary");
@@ -416,6 +425,35 @@ async function AgregarTarjetas (event){
     
 }
 
+async function actualizarTarea (event){
+
+    event.preventDefault();
+
+    const ValidacionTarea = await BuscarIdTarea(Updateid.value);
+    console.log(ValidacionTarea);
+    
+
+    if (ValidacionTarea){
+        
+        alert("el id ingresado es valido")
+    }
+    else {
+        alert("el id no esta asignado a una tarea");
+        return
+    }
+
+    const respuesta =await updateTarea(Updateid.value, ActualizarT.value);
+
+    if (respuesta){
+        alert("Se actualizo la tarea");    
+    }
+    else{
+        alert("no se actualizo la tarea")
+    }
+    
+
+
+}
 
 async function eliminarTarea (event){
 
@@ -473,8 +511,9 @@ async function eliminarTarea (event){
 
 submitBtn.addEventListener("click", handleFormSubmit);
 messageForm.addEventListener("submit", AgregarTarjetas);
-deleteBtn.addEventListener("click", eliminarTarea);
 
+updateBtn.addEventListener("click", actualizarTarea);
+deleteBtn.addEventListener("click", eliminarTarea);
 resetBtn.addEventListener("click", (e) => {
     e.reload();
 
