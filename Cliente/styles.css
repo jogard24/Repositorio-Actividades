@@ -195,6 +195,7 @@ body {
 
 .form__label {
     display: block;
+    margin-top: 20px;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
     color: var(--color-text-primary);
@@ -297,6 +298,7 @@ body {
 .btn__icon {
     font-size: var(--font-size-lg);
 }
+
 
 /* ============================================
    SECCIÓN DE MENSAJES
