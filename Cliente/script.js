@@ -3,7 +3,7 @@ import { request } from "./helper/fetch.js"
 import { BuscarNombre, obtenerTareasPorUsuario, BuscarIdTarea } from "./Peticiones/index.js"
 import { agregarNuevaTarea } from "./Peticiones/AgregarT.js"
 import { eliminarTareaPorId } from "./Peticiones/BorrarTarea.js"
-import { updateTarea } from "./helper/Update.js";
+import { updateTarea } from "./helper/index.js";
 
 // ============================================
 // 1. SELECCIÓN DE ELEMENTOS DEL DOM
