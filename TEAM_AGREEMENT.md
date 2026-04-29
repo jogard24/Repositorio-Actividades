@@ -7,7 +7,7 @@ Este documento establece las reglas de convivencia, comunicación y estándares 
 | :--- | :--- | :--- |
 | [jose gabriel roa diaz] | Líder (Arquitecto) | `@jogard24` |
 | [Juan David Caceres Hernandez] | Desarrollador | `@Javid495` |
-| [Nombre del Aprendiz 3] | Desarrollador | `@usuario3` |
+| [Jhonatan David Leherici Carrascal ] | Desarrollador | `@Oatan150522` |
 | [Wendy Vanesa Vera Arrieta] | Desarrollador | `@Wendy-vera` |
 
 ## 2. Canales de Comunicación
