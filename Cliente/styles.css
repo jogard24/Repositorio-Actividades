@@ -395,7 +395,7 @@ body {
 }
 
 .message-card__avatar {
-    width: 40px;
+    width: 100px;
     height: 40px;
     border-radius: var(--radius-full);
     background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));

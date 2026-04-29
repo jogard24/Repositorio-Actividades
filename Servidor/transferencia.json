@@ -79,10 +79,17 @@
     },
     {
       "name": "Ana Torres",
-      "tarea": "hola como estas",
-      "body": "no hago nada",
+      "tarea": "hola como andas",
+      "body": "hello",
       "active": false,
-      "id": "KrW4r8_mm6I"
+      "id": "t1G01Q3tubw"
+    },
+    {
+      "name": "Ana Torres",
+      "tarea": "hola",
+      "body": "como andas",
+      "active": false,
+      "id": "Stn_EmxgSTU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -51,9 +51,13 @@
                             rows="4"
                             aria-required="true"
                         ></textarea>
+
+                        <span class="form__error" id="userMessageError"></span>
+
                         <label for="userMessage" class="form__label">
                             Descripcion de la tarea:
                         </label>
+
                         <textarea 
                             id="UserDescripcion" 
                             class="form__input form__textarea" 
@@ -61,7 +65,26 @@
                             rows="4"
                             aria-required="true"
                         ></textarea>
-                        <span class="form__error" id="userMessageError"></span>
+
+                        <span class="form__error" id="userDescripcionError"></span>
+
+                         <label for="userMessage" class="form__label">
+                            Descripcion de la tarea:
+                        </label>
+
+                        <label for="userMessage" class="form__label">
+                            Ingrese el id de la tarea a eliminar:
+                        </label>
+
+                        <textarea 
+                            id="Deleteid" 
+                            class="form__input form__textarea" 
+                            placeholder="Escribe la descripcion de la tarea aquí..."
+                            rows="4"
+                            aria-required="true"
+                        ></textarea>
+                        
+                        <span class="form__error" id="idDeleteError"></span>
                     </div>
 
                     <button type="submit" class="btn btn--secundary" id="submitBtn">

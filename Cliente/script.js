@@ -1,5 +1,6 @@
 import { BuscarNombre, obtenerTareasPorUsuario } from "./Peticiones/index.js"
 import { agregarNuevaTarea } from "./Peticiones/AgregarT.js"
+import { eliminarTareaPorId } from "./Peticiones/BorrarTarea.js"
 
 // ============================================
 // 1. SELECCIÓN DE ELEMENTOS DEL DOM
@@ -18,6 +19,7 @@ const userNameInput = document.getElementById('userName');
 const userMessageInput = document.getElementById('userMessage');
 const userDesripcionInput = document.getElementById('UserDescripcion');
 const conjuntoDatos = document.querySelector(".form__group");
+const Deleteid = document.querySelector("#Deleteid")
 
 
 // Botón de envío
@@ -27,6 +29,8 @@ const submitBtnTareas = document.getElementById('submitBtn');
 // Elementos para mostrar errores
 const userNameError = document.getElementById('userNameError');
 const userMessageError = document.getElementById('userMessageError');
+const userDescripcionError = document.getElementById(`userDescripcionError`);
+const idDeleteError = document.querySelector("#idDeleteError");
 
 // Contenedor donde se mostrarán los mensajes
 const messagesContainer = document.getElementById('messagesContainer');
@@ -88,13 +92,14 @@ function validateForm(a) {
     
     const userMessage = userMessageInput.value;
     const UserDescripcion = userDesripcionInput.value;
+    const UserDelete = Deleteid.value;
 
     let isValid = true;
     
 
     if (!isValidInput(userMessage)) {
         userMessageInput.classList.add("form__input--error");
-        userMessageError.textContent ="El Mensaje no es valido"
+        userMessageError.textContent ="El Titulo no es valido"
         isValid = false;
     } 
     
@@ -104,23 +109,35 @@ function validateForm(a) {
         userMessageInput.textContent =""
     }
 
-    if (!isValidInput(userMessage)) {
-        userMessageInput.classList.add("form__input--error");
-        userMessageError.textContent ="la descripcion no deve estar vacia"
+    if (!isValidInput(UserDescripcion)) {
+        userDesripcionInput.classList.add("form__input--error");
+        userDescripcionError.textContent ="la descripcion no debe estar vacia"
         isValid = false;
     } 
     
     else {
         isValid = true 
-        userMessageInput.classList.remove("form__input--error");
-        userMessageInput.textContent =""
+        userDesripcionInput.classList.remove("form__input--error");
+        userDescripcionError.textContent =""
+    }
+
+    if (!isValidInput(UserDelete)) {
+        Deleteid.classList.add("form__input--error");
+        idDeleteError.textContent ="la descripcion no debe estar vacia"
+        isValid = false;
+    } 
+    
+    else {
+        isValid = true 
+        Deleteid.classList.remove("form__input--error");
+        idDeleteError.textContent =""
     }
         
     return isValid;
     
 }
 
-
+// Funcion que valida que el usuario este registrado
 function validateId (a){
 
     let isValid = true;
@@ -163,14 +180,6 @@ function getCurrentTimestamp() {
  * @param {string} name - Nombre completo
  * @returns {string} - Iniciales en mayúsculas
  */
-function getInitials(name) {
-    // TODO: Implementar función para obtener iniciales
-    // Pista: 
-    // 1. Separar el nombre por espacios usando split(' ')
-    // 2. Tomar la primera letra de cada palabra
-    // 3. Unirlas y convertirlas a mayúsculas
-    // 4. Si solo hay una palabra, retornar las dos primeras letras
-}
 
 /**
  * Actualiza el contador de mensajes
@@ -234,7 +243,7 @@ async function createMessageElement(userName) {
         div.innerHTML = `
             <div class="message-card__header">
                 <div class="message-card__user">
-                    <div class="message-card__avatar">T</div>
+                    <div class="message-card__avatar">${datos.id}</div>
                     <span class="message-card__username">${datos.name}</span>
                 </div>
                 <span class="message-card__timestamp">${fecha}</span>
@@ -334,10 +343,6 @@ async function handleFormSubmit(event) {
 
 async function AgregarTarjetas (event){
 
-    const userNameInput = document.getElementById('userName');
-    const userMessageInput = document.getElementById('userMessage');
-    const userDesripcionInput = document.getElementById('UserDescripcion');
-
     event.preventDefault();
 
     const validacionForm = validateForm();
@@ -350,13 +355,23 @@ async function AgregarTarjetas (event){
         return
     }
 
+    if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) return;
+
     const resp = await agregarNuevaTarea(userNameInput.value, userMessageInput.value, userDesripcionInput.value);
+    const eliminar = await eliminarTareaPorId(Deleteid.value);
 
     if (resp){
         alert("se añadieron los datos correctamente")
     }
     else{
         alert("no se añadieron los datos correctamente")
+    }
+
+    if (eliminar){
+        alert("Se eliminaron los datos correctamente");
+    }
+    else{
+        alert("hubo un error en la eliminacion de los datos")
     }
 
 
