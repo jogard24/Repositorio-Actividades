@@ -65,24 +65,25 @@
     },
     {
       "name": "Ana Torres",
-      "tarea": "hola",
+      "tarea": "hola me mandas la respuesta que quiero?",
       "body": "como andas",
       "active": false,
-      "id": "M88dGRzcStA"
+      "id": "M88dGRzcStA",
+      "title": "hola actualizas?"
+    },
+    {
+      "name": "Carlos Gómez",
+      "tarea": "todo esta fallando",
+      "body": "tarea",
+      "active": false,
+      "id": "OyCDK4NaflQ"
     },
     {
       "name": "Ana Torres",
-      "tarea": "hola como andas",
-      "body": "ando en gloria",
+      "tarea": "probando cambios",
+      "body": "intentando uno dos tres",
       "active": false,
-      "id": "ewefzvCGY-c"
-    },
-    {
-      "name": "Ana Torres",
-      "tarea": "hola como tas",
-      "body": "sera",
-      "active": false,
-      "id": "dHN6_2zNjN4"
+      "id": "57h14de8K8A"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

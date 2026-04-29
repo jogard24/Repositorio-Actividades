@@ -1,7 +1,8 @@
 import { request } from "./helper/fetch.js"
-import { BuscarNombre, obtenerTareasPorUsuario } from "./Peticiones/index.js"
+import { BuscarNombre, obtenerTareasPorUsuario, BuscarIdTarea } from "./Peticiones/index.js"
 import { agregarNuevaTarea } from "./Peticiones/AgregarT.js"
 import { eliminarTareaPorId } from "./Peticiones/BorrarTarea.js"
+import { updateTarea } from "./helper/Update.js";
 
 // ============================================
 // 1. SELECCIÓN DE ELEMENTOS DEL DOM
@@ -15,20 +16,26 @@ import { eliminarTareaPorId } from "./Peticiones/BorrarTarea.js"
 // Formulario
 const messageForm = document.getElementById('messageForm');
 const eliminarTares = document.querySelector("#deleteForm")
+const actualizarTareas = document.querySelector("#updateForm")
 
 // Campos de entrada
 const userNameInput = document.getElementById('userName');
 const userMessageInput = document.getElementById('userMessage');
 const userDesripcionInput = document.getElementById('UserDescripcion');
 const conjuntoDatos = document.querySelector(".form__group");
+
 const Deleteid = document.querySelector("#Deleteid");
-const aparecerDelete = document.querySelector("#aparecerDelete")
+const aparecerDelete = document.querySelector("#aparecerDelete");
 
+const Updateid = document.querySelector("#updateid");
+const ActualizarT = document.querySelector("#ActualizarT");
 
+const aparecerUpdate = document.querySelector("#aparecerUpdate")
 // Botón de envío
 const submitBtn = document.getElementById('submitBtnid');
 const submitBtnTareas = document.getElementById('submitBtn');
 const deleteBtn = document.querySelector("#deleteBtn");
+const updateBtn = document.getElementById("updateBtn");
 const resetBtn = document.querySelector("#resetBtn")
 
 // Elementos para mostrar errores
@@ -36,6 +43,7 @@ const userNameError = document.getElementById('userNameError');
 const userMessageError = document.getElementById('userMessageError');
 const userDescripcionError = document.getElementById(`userDescripcionError`);
 const idDeleteError = document.querySelector("#idDeleteError");
+const idUpdateError = document.querySelector("#idUpdateError");
 
 // Contenedor donde se mostrarán los mensajes
 const messagesContainer = document.getElementById('messagesContainer');
@@ -399,10 +407,14 @@ async function handleFormSubmit(event) {
     //mostrar los campos habilitados
     conjuntoDatos.classList.add("form__id");
     aparecerDelete.classList.add("form__id");
-
+    aparecerUpdate.classList.add("form__id");
+    
     //Mostar boton subir tareas
     submitBtnTareas.classList.remove("btn--secundary");
     submitBtnTareas.classList.add("btn--primary");
+
+    updateBtn.classList.add("btn--primary");
+    updateBtn.classList.remove("btn--secundary");
 
     //Mostar boton eliminar tareas
     deleteBtn.classList.remove("btn--secundary");
@@ -446,6 +458,35 @@ async function AgregarTarjetas(event) {
 
 }
 
+async function actualizarTarea (event){
+
+    event.preventDefault();
+
+    const ValidacionTarea = await BuscarIdTarea(Updateid.value);
+    console.log(ValidacionTarea);
+    
+
+    if (ValidacionTarea){
+        
+        alert("el id ingresado es valido")
+    }
+    else {
+        alert("el id no esta asignado a una tarea");
+        return
+    }
+
+    const respuesta =await updateTarea(Updateid.value, ActualizarT.value);
+
+    if (respuesta){
+        alert("Se actualizo la tarea");    
+    }
+    else{
+        alert("no se actualizo la tarea")
+    }
+    
+
+
+}
 
 async function eliminarTarea(event) {
 
@@ -503,8 +544,9 @@ async function eliminarTarea(event) {
 
 submitBtn.addEventListener("click", handleFormSubmit);
 messageForm.addEventListener("submit", AgregarTarjetas);
-deleteBtn.addEventListener("click", eliminarTarea);
 
+updateBtn.addEventListener("click", actualizarTarea);
+deleteBtn.addEventListener("click", eliminarTarea);
 resetBtn.addEventListener("click", (e) => {
     e.reload();
 
@@ -516,15 +558,14 @@ resetBtn.addEventListener("click", (e) => {
 
 
 
-    /
-    /**
-     * Esta función se ejecuta cuando el DOM está completamente cargado
-     */
-    document.addEventListener('DOMContentLoaded', function () {
-        console.log('✅ DOM completamente cargado');
-        console.log('📝 Aplicación de registro de mensajes iniciada');
-        cargarusers();
-
-        // Aquí puedes agregar cualquier inicialización adicional
-        // Por ejemplo, cargar mensajes guardados del localStorage
-    });
+/**
+ * Esta función se ejecuta cuando el DOM está completamente cargado
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ DOM completamente cargado');
+    console.log('📝 Aplicación de registro de mensajes iniciada');
+    cargarusers();
+    
+    // Aquí puedes agregar cualquier inicialización adicional
+    // Por ejemplo, cargar mensajes guardados del localStorage
+});
