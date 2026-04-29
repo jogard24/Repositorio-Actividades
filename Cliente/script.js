@@ -56,34 +56,22 @@ let totalMessages = 0;
 // 2. FUNCIONES AUXILIARES
 // ============================================
 
-/**
- * Valida que un campo no esté vacío ni contenga solo espacios en blanco
- * @param {string} value - El valor a validar
- * @returns {boolean} - true si es válido, false si no lo es
- */
-
 function isValidInput(value) {
 
     return value.trim().length > 0;
     // TODO: Implementar validación
 }
 
-/**
- * Muestra un mensaje de error en un elemento específico
- * @param {HTMLElement} errorElement - Elemento donde mostrar el error
- * @param {string} message - Mensaje de error a mostrar
- */
+
 function showError(errorElement, message) {
     errorElement.textContent = message;
-
     // TODO: Implementar función para mostrar error
     // Pista: asigna el mensaje al textContent del elemento
 }
 
-/**
- * Limpia el mensaje de error de un elemento específico
- * @param {HTMLElement} errorElement - Elemento del que limpiar el error
- */
+
+//Limpia el mensaje de error de un elemento específico
+
 function clearError(errorElement) {
     errorElement.textContent = "";
     // TODO: Implementar función para limpiar errores
@@ -180,10 +168,7 @@ function validateId (a){
 
 
 
-/**
- * Obtiene la fecha y hora actual formateada
- * @returns {string} - Fecha y hora en formato legible
- */
+// Agarra el tiempo actual
 function getCurrentTimestamp() {
     const now = new Date();
     const options = { 
@@ -384,6 +369,10 @@ async function handleFormSubmit(event) {
     submitBtnTareas.classList.add("btn--primary");
     deleteBtn.classList.remove("btn--secundary");
     deleteBtn.classList.add("btn--primary");   
+
+    // Para inabilitar el campo nombre
+    userNameInput.setAttribute("disabled")
+
     createMessageElement(userNameInput.value, userMessageInput.value);
     
 }
@@ -432,7 +421,14 @@ async function eliminarTarea (event){
         return
     }
 
-     if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) return;
+     if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)){
+        console.log("Datos Eliminaddos");
+     }
+     else{
+        console.log("los datos no fueron eliminados");
+        return;
+     }
+
      const eliminar = await eliminarTareaPorId(Deleteid.value);
 
     if (eliminar){
@@ -445,7 +441,7 @@ async function eliminarTarea (event){
         
         inputIdEliminar.value = "";
 
-        totalMessages -=1
+        totalMessages --;
     }
 
     else{
