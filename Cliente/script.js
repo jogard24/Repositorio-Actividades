@@ -93,44 +93,44 @@ function clearError(errorElement) {
 
 //  Validavion de los campos titulo de tarea y descripcion de tarea
 function validateForm(a) {
-    
+
     const userMessage = userMessageInput.value;
     const UserDescripcion = userDesripcionInput.value;
     const UserDelete = Deleteid.value;
 
     let isValid = true;
-    
+
 
     if (!isValidInput(userMessage)) {
         userMessageInput.classList.add("form__input--error");
-        userMessageError.textContent ="El Titulo no es valido"
+        userMessageError.textContent = "El Titulo no es valido"
         isValid = false;
-    } 
-    
+    }
+
     else {
-        isValid = true 
+        isValid = true
         userMessageInput.classList.remove("form__input--error");
-        userMessageInput.textContent =""
+        userMessageInput.textContent = ""
     }
 
     if (!isValidInput(UserDescripcion)) {
         userDesripcionInput.classList.add("form__input--error");
-        userDescripcionError.textContent ="la descripcion no debe estar vacia"
+        userDescripcionError.textContent = "la descripcion no debe estar vacia"
         isValid = false;
-    } 
-    
-    else {
-        isValid = true 
-        userDesripcionInput.classList.remove("form__input--error");
-        userDescripcionError.textContent =""
     }
-  
+
+    else {
+        isValid = true
+        userDesripcionInput.classList.remove("form__input--error");
+        userDescripcionError.textContent = ""
+    }
+
     return isValid;
-    
+
 }
 
 //validar que el campo de eliminar no este vacio
-function comprobarEliminacion(a){
+function comprobarEliminacion(a) {
 
     //se obtiene el valor de la eliminacion
     const UserDelete = Deleteid.value;
@@ -139,36 +139,36 @@ function comprobarEliminacion(a){
 
     if (!isValidInput(UserDelete)) {
         Deleteid.classList.add("form__input--error");
-        idDeleteError.textContent ="la descripcion no debe estar vacia"
+        idDeleteError.textContent = "la descripcion no debe estar vacia"
         isValid = false;
-    } 
-    
+    }
+
     else {
         isValid = true;
         Deleteid.classList.remove("form__input--error");
-        idDeleteError.textContent ="";
+        idDeleteError.textContent = "";
     }
-      
+
     return isValid
 }
 
 
 // Funcion que valida que el usuario este registrado
-function validateId (a){
+function validateId(a) {
 
     let isValid = true;
     const userName = userNameInput.value;
 
     if (!isValidInput(userName)) {
         userNameInput.classList.add("form__input--error");
-        userNameError.textContent ="El nombre de usuario no es valido"
+        userNameError.textContent = "El nombre de usuario no es valido"
         isValid = false;
-    } 
-    
+    }
+
     else {
-        isValid = true 
+        isValid = true
         userNameInput.classList.remove("form__input--error");
-        userNameError.textContent =""
+        userNameError.textContent = ""
     }
 
     return isValid;
@@ -180,9 +180,9 @@ function validateId (a){
 // Agarra el tiempo actual
 function getCurrentTimestamp() {
     const now = new Date();
-    const options = { 
-        year: 'numeric', 
-        month: 'long', 
+    const options = {
+        year: 'numeric',
+        month: 'long',
         day: 'numeric',
         hour: '2-digit',
         minute: '2-digit'
@@ -197,7 +197,7 @@ function updateMessageCount(totalMessages) {
     // Pista: Usa template literals para crear el texto
     // Formato: "X mensaje(s)" o "X mensajes"
 
-    
+
     messageCount.textContent = `${totalMessages} tarea/s`
 }
 
@@ -222,6 +222,37 @@ function showEmptyState() {
 // ============================================
 // 3. CREACIÓN DE ELEMENTOS
 // ============================================
+
+const userNameList = document.getElementById('userNameList');
+
+
+function renderizarDatalist(users) {
+    userNameList.innerHTML = '';
+    const nombresAgregados = new Set();
+    users.forEach(user => {
+        if (!nombresAgregados.has(user.name)) {
+            nombresAgregados.add(user.name);
+            const option = document.createElement('option');
+            option.value = user.name;
+            userNameList.appendChild(option);
+        }
+    });
+}
+
+userNameInput.addEventListener('input', () => {
+    const query = userNameInput.value.toLowerCase();
+
+    Array.from(UsuariosTableBody.querySelectorAll('tr')).forEach(tr => {
+        const nombre = tr.children[1].textContent.toLowerCase();
+        if (nombre.includes(query)) {
+            tr.style.display = ''; // mostrar
+        } else {
+            tr.style.display = 'none'; // ocultar
+        }
+    });
+});
+
+
 
 
 
@@ -252,33 +283,35 @@ async function cargarusers() {
         const users = await request('users')
         console.log('Datos recibidos:', users);
         renderizarTabla(users);
+        renderizarDatalist(users);
+
     } catch (error) {
         console.error('Error completo:', error);
         alert('Error al cargar los users: ' + error.message)
     }
-    
+
 }
 
 // funcion que me permite mostrar las tarjetas de los usuarios
 async function createMessageElement(userName) {
     // TODO: Implementar la creación de un nuevo mensaje
-    
+
     messagesContainer.innerHTML = "";
     // PASO 1: Crear el contenedor principal del mensaje
-    
+
     const fecha = getCurrentTimestamp();
-    
+
     const datosUsuario = await obtenerTareasPorUsuario(userName);
     // PASO 2: Crear la estructura HTML del mensaje
     // Puedes usar innerHTML con la siguiente estructura:
-    
-    datosUsuario.forEach(datos => {    
+
+    datosUsuario.forEach(datos => {
         const div = document.createElement("div");
-    
+
         // Asignar la clase 'message-card'
         div.classList.add("message-card");
         div.classList.add(`tarea${datos.id}`)
-        
+
         div.innerHTML = `
             <div class="message-card__header">
                 <div class="message-card__user">
@@ -294,7 +327,7 @@ async function createMessageElement(userName) {
 
         messagesContainer.appendChild(div);
 
-        totalMessages +=1
+        totalMessages += 1
 
         updateMessageCount(totalMessages)
     })
@@ -303,24 +336,24 @@ async function createMessageElement(userName) {
 }
 
 async function createTarjetas() {
-    
+
     // PASO 1: Crear el contenedor principal del mensaje
-    
+
     const fecha = getCurrentTimestamp();
-    
+
     const userNameInput = document.getElementById('userName');
     const userMessageInput = document.getElementById('userMessage');
     const userDesripcionInput = document.getElementById('UserDescripcion');
 
     // PASO 2: Crear la estructura HTML del mensaje
     // Puedes usar innerHTML con la siguiente estructura:    
-        const div = document.createElement("div");
-    
-        // Asignar la clase 'message-card'
-        div.classList.add("message-card");
-        div.classList.add(`tarea`);
+    const div = document.createElement("div");
 
-        div.innerHTML = `
+    // Asignar la clase 'message-card'
+    div.classList.add("message-card");
+    div.classList.add(`tarea`);
+
+    div.innerHTML = `
             <div class="message-card__header">
                 <div class="message-card__user">
                     <div class="message-card__avatar">Nueva Tarea</div>
@@ -332,11 +365,11 @@ async function createTarjetas() {
             <div class="message-card__content">${userDesripcionInput.value}</div> 
         `
 
-        messagesContainer.appendChild(div);
+    messagesContainer.appendChild(div);
 
-        totalMessages +=1
+    totalMessages += 1
 
-        updateMessageCount(totalMessages)
+    updateMessageCount(totalMessages)
 
     hideEmptyState();
 }
@@ -348,14 +381,14 @@ async function createTarjetas() {
 
 async function handleFormSubmit(event) {
     // TODO: Implementar el manejador del evento submit
-    
+
     // PASO 1: Prevenir el comportamiento por defecto del formulario
     event.preventDefault();
-    
+
     // PASO 2: Validar el formulario
     const formularioV = validateId();
-    
-    if (!formularioV){
+
+    if (!formularioV) {
         alert("Los datos ingresados no son validos")
         return
     }
@@ -363,14 +396,14 @@ async function handleFormSubmit(event) {
     // PASO 3: Obtener los valores de los campos
     const confirmacionUser = await BuscarNombre(userNameInput.value);
 
-    if (!confirmacionUser){
+    if (!confirmacionUser) {
         alert("El usuario no existe")
         return
     }
-    else{
+    else {
         alert("el usuario existe");
     }
-    
+
     //mostrar los campos habilitados
     conjuntoDatos.classList.add("form__id");
     aparecerDelete.classList.add("form__id");
@@ -389,40 +422,40 @@ async function handleFormSubmit(event) {
 
     //mostrar boton resetear formulario
     resetBtn.classList.remove("btn--secundary");
-    resetBtn.classList.add("btn--primary"); 
+    resetBtn.classList.add("btn--primary");
 
     // Para inabilitar el campo nombre
     userNameInput.setAttribute("disabled", "true");
 
     createMessageElement(userNameInput.value, userMessageInput.value);
-    
+
 }
 
-async function AgregarTarjetas (event){
+async function AgregarTarjetas(event) {
 
     event.preventDefault();
 
     const validacionForm = validateForm();
 
-    if (validacionForm){
-       alert("los datos ingresados son validos")
+    if (validacionForm) {
+        alert("los datos ingresados son validos")
     }
-    else{
+    else {
         alert("los datos ingresados no son permitidos")
         return
     }
 
     const resp = await agregarNuevaTarea(userNameInput.value, userMessageInput.value, userDesripcionInput.value);
-    
-    if (resp){
+
+    if (resp) {
         alert("se añadieron los datos correctamente")
     }
-    else{
+    else {
         alert("no se añadieron los datos correctamente")
     }
 
     createTarjetas();
-    
+
 }
 
 async function actualizarTarea (event){
@@ -455,7 +488,7 @@ async function actualizarTarea (event){
 
 }
 
-async function eliminarTarea (event){
+async function eliminarTarea(event) {
 
     event.preventDefault();
 
@@ -463,38 +496,38 @@ async function eliminarTarea (event){
     console.log(validacionForm);
 
 
-    if (validacionForm){
-       alert("los datos ingresados son validos")
+    if (validacionForm) {
+        alert("los datos ingresados son validos")
     }
-    else{
+    else {
         alert("los datos ingresados no son permitidos")
         return
     }
 
-     if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)){
+    if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) {
         console.log("Datos Eliminaddos");
-     }
-     else{
+    }
+    else {
         console.log("los datos no fueron eliminados");
         return;
-     }
+    }
 
-     const eliminar = await eliminarTareaPorId(Deleteid.value);
+    const eliminar = await eliminarTareaPorId(Deleteid.value);
 
-    if (eliminar){
+    if (eliminar) {
         alert("Se eliminaron los datos correctamente");
 
         const tareaVisual = document.querySelector(`.tarea${Deleteid.value}`);
         if (tareaVisual) {
             tareaVisual.remove(); // Esto quita el elemento del HTML sin recargar
         }
-        
+
         inputIdEliminar.value = "";
 
-        totalMessages --;
+        totalMessages--;
     }
 
-    else{
+    else {
         alert("hubo un error en la eliminacion de los datos")
     }
 
@@ -519,9 +552,9 @@ resetBtn.addEventListener("click", (e) => {
 
 })
 
-// TODO: Registrar eventos 'input' en los campos para limpiar errores al escribir
-// Pista: userNameInput.addEventListener('input', handleInputChange);
-// Pista: userMessageInput.addEventListener('input', handleInputChange);
+    // TODO: Registrar eventos 'input' en los campos para limpiar errores al escribir
+    // Pista: userNameInput.addEventListener('input', handleInputChange);
+    // Pista: userMessageInput.addEventListener('input', handleInputChange);
 
 
 
