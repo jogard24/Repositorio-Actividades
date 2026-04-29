@@ -99,8 +99,32 @@
                         <span class="btn__icon">➤</span>
                     </button>
                 </form>
+                
+                <form id="updateForm" action="" class="form">
+                    <div id="aparecerUpdate" class="form__group">
+                        <label for="updateid" class="form__label">
+                            Ingrese id para actualizar:
+                        </label>
+                        <input 
+                            type="text" 
+                            id="updateid" 
+                            class="form__input" 
+                            placeholder="Ingrese el id de la tarea existente que va a modificar" 
+                            aria-required="true"
+                        >
+                    </div>
+
+                    <span class="form__error" id="idUpdateError"></span>
+
+                    <button type="submit" class="btn btn--secundary" id="updateBtn">
+                        <span class="btn__text">Actualizar tarea</span>
+                        <span class="btn__icon">➤</span>
+                    </button>
+                </form>
             </div>
         </section>
+
+        
 
         <!-- Área de mensajes -->
         <section class="messages-section">

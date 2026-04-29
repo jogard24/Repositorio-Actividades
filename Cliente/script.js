@@ -14,6 +14,7 @@ import { eliminarTareaPorId } from "./Peticiones/BorrarTarea.js"
 // Formulario
 const messageForm = document.getElementById('messageForm');
 const eliminarTares = document.querySelector("#deleteForm")
+const actualizarTareas = document.querySelector("#updateForm")
 
 // Campos de entrada
 const userNameInput = document.getElementById('userName');
@@ -22,18 +23,20 @@ const userDesripcionInput = document.getElementById('UserDescripcion');
 const conjuntoDatos = document.querySelector(".form__group");
 const Deleteid = document.querySelector("#Deleteid");
 const aparecerDelete = document.querySelector("#aparecerDelete")
-
-
+const Updateid = document.querySelector("updateid");
+const aparecerUpdate = document.querySelector("#aparecerUpdate")
 // Botón de envío
 const submitBtn = document.getElementById('submitBtnid');
 const submitBtnTareas = document.getElementById('submitBtn');
 const deleteBtn = document.querySelector("#deleteBtn");
+const updateBtn = document.getElementById("updateBtn");
 
 // Elementos para mostrar errores
 const userNameError = document.getElementById('userNameError');
 const userMessageError = document.getElementById('userMessageError');
 const userDescripcionError = document.getElementById(`userDescripcionError`);
 const idDeleteError = document.querySelector("#idDeleteError");
+const idUpdateError = document.querySelector("#idUpdateError");
 
 // Contenedor donde se mostrarán los mensajes
 const messagesContainer = document.getElementById('messagesContainer');

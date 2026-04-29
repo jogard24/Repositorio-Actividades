@@ -90,6 +90,20 @@
       "body": "como andas",
       "active": false,
       "id": "M88dGRzcStA"
+    },
+    {
+      "name": "Carlos Gómez",
+      "tarea": "todo esta fallando",
+      "body": "tarea",
+      "active": false,
+      "id": "OyCDK4NaflQ"
+    },
+    {
+      "name": "Ana Torres",
+      "tarea": "probando cambios",
+      "body": "intentando uno dos tres",
+      "active": false,
+      "id": "57h14de8K8A"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
