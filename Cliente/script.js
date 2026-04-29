@@ -234,13 +234,22 @@ function showEmptyState() {
 // Esta funciones es para cargar los usuarios
 function renderizarTabla(users) {
     UsuariosTableBody.innerHTML = ''; // Se limpia las tablas antes de limpiarla
-    users.forEach(users => {
-        const fila = document.createElement('tr')
-        fila.innerHTML = `
-            <td>${users.id}</td>
-            <td>${users.name}</td>
-        `;  
-        UsuariosTableBody.appendChild(fila);
+
+    // Crear un Set para trackear nombres ya agregados y evitar duplicados
+    const nombresAgregados = new Set();
+
+    users.forEach(user => {
+        // Solo agregar si el nombre no ha sido agregado antes
+        if (!nombresAgregados.has(user.name)) {
+            nombresAgregados.add(user.name);
+
+            const fila = document.createElement('tr')
+            fila.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+            `;
+            UsuariosTableBody.appendChild(fila);
+        }
     })
 }
 
@@ -252,7 +261,8 @@ async function cargarusers() {
     } catch (error) {
         console.error('Error completo:', error);
         alert('Error al cargar los users: ' + error.message)
-    } 
+    }
+    
 }
 
 // funcion que me permite mostrar las tarjetas de los usuarios
