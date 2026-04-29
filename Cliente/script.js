@@ -14,18 +14,21 @@ import { eliminarTareaPorId } from "./Peticiones/BorrarTarea.js"
 
 // Formulario
 const messageForm = document.getElementById('messageForm');
+const eliminarTares = document.querySelector("#deleteForm")
 
 // Campos de entrada
 const userNameInput = document.getElementById('userName');
 const userMessageInput = document.getElementById('userMessage');
 const userDesripcionInput = document.getElementById('UserDescripcion');
 const conjuntoDatos = document.querySelector(".form__group");
-const Deleteid = document.querySelector("#Deleteid")
+const Deleteid = document.querySelector("#Deleteid");
+const aparecerDelete = document.querySelector("#aparecerDelete")
 
 
 // Botón de envío
 const submitBtn = document.getElementById('submitBtnid');
 const submitBtnTareas = document.getElementById('submitBtn');
+const deleteBtn = document.querySelector("#deleteBtn");
 
 // Elementos para mostrar errores
 const userNameError = document.getElementById('userNameError');
@@ -124,6 +127,18 @@ function validateForm(a) {
         userDesripcionInput.classList.remove("form__input--error");
         userDescripcionError.textContent =""
     }
+  
+    return isValid;
+    
+}
+
+//validar que el campo de eliminar no este vacio
+function comprobarEliminacion(a){
+
+    //se obtiene el valor de la eliminacion
+    const UserDelete = Deleteid.value;
+
+    let isValid = true;
 
     if (!isValidInput(UserDelete)) {
         Deleteid.classList.add("form__input--error");
@@ -132,14 +147,14 @@ function validateForm(a) {
     } 
     
     else {
-        isValid = true 
+        isValid = true;
         Deleteid.classList.remove("form__input--error");
-        idDeleteError.textContent =""
+        idDeleteError.textContent ="";
     }
-        
-    return isValid;
-    
+      
+    return isValid
 }
+
 
 // Funcion que valida que el usuario este registrado
 function validateId (a){
@@ -163,6 +178,8 @@ function validateId (a){
 
 }
 
+
+
 /**
  * Obtiene la fecha y hora actual formateada
  * @returns {string} - Fecha y hora en formato legible
@@ -179,15 +196,8 @@ function getCurrentTimestamp() {
     return now.toLocaleDateString('es-ES', options);
 }
 
-/**
- * Obtiene las iniciales de un nombre
- * @param {string} name - Nombre completo
- * @returns {string} - Iniciales en mayúsculas
- */
 
-/**
- * Actualiza el contador de mensajes
- */
+
 function updateMessageCount(totalMessages) {
     // TODO: Implementar actualización del contador
     // Pista: Usa template literals para crear el texto
@@ -219,11 +229,6 @@ function showEmptyState() {
 // 3. CREACIÓN DE ELEMENTOS
 // ============================================
 
-/**
- * Crea un nuevo elemento de mensaje en el DOM
- * @param {string} userName - Nombre del usuario
- * @param {string} message - Contenido del mensaje
- */
 
 
 // Esta funciones es para cargar los usuarios
@@ -267,7 +272,8 @@ async function createMessageElement(userName) {
         const div = document.createElement("div");
     
         // Asignar la clase 'message-card'
-        div.classList.add("message-card")
+        div.classList.add("message-card");
+        div.classList.add(`tarea${datos.id}`)
         
         div.innerHTML = `
             <div class="message-card__header">
@@ -276,9 +282,10 @@ async function createMessageElement(userName) {
                     <span class="message-card__username">${datos.name}</span>
                 </div>
                 <span class="message-card__timestamp">${fecha}</span>
-            </div>
-            <div class="message-card__content">${datos.tarea}</div>
-            <div class="message-card__content">${datos.body}</div> 
+
+                </div>
+                <div class="message-card__content">${datos.tarea}</div>
+                <div class="message-card__content">${datos.body}</div> 
         `
 
         messagesContainer.appendChild(div);
@@ -334,11 +341,6 @@ async function createTarjetas(Datos) {
 // 4. MANEJO DE EVENTOS
 // ============================================
 
-/**
- * Maneja el evento de envío del formulario
- * @param {Event} event - Evento del formulario
- */
-
 async function handleFormSubmit(event) {
     // TODO: Implementar el manejador del evento submit
     
@@ -360,11 +362,17 @@ async function handleFormSubmit(event) {
         alert("El usuario no existe")
         return
     }
+    else{
+        alert("el usuario existe");
+    }
     
+    //mostrar los campos habilitados
     conjuntoDatos.classList.add("form__id");
+    aparecerDelete.classList.add("form__id");   
     submitBtnTareas.classList.remove("btn--secundary");
     submitBtnTareas.classList.add("btn--primary");
-
+    deleteBtn.classList.remove("btn--secundary");
+    deleteBtn.classList.add("btn--primary");   
     createMessageElement(userNameInput.value, userMessageInput.value);
     
 }
@@ -383,11 +391,8 @@ async function AgregarTarjetas (event){
         return
     }
 
-    if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) return;
-
     const resp = await agregarNuevaTarea(userNameInput.value, userMessageInput.value, userDesripcionInput.value);
-    const eliminar = await eliminarTareaPorId(Deleteid.value);
-
+    
     if (resp){
         alert("se añadieron los datos correctamente")
     }
@@ -395,9 +400,42 @@ async function AgregarTarjetas (event){
         alert("no se añadieron los datos correctamente")
     }
 
+    
+}
+
+
+async function eliminarTarea (event){
+
+    event.preventDefault();
+
+    const validacionForm = comprobarEliminacion();
+    console.log(validacionForm);
+
+
+    if (validacionForm){
+       alert("los datos ingresados son validos")
+    }
+    else{
+        alert("los datos ingresados no son permitidos")
+        return
+    }
+
+     if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) return;
+     const eliminar = await eliminarTareaPorId(Deleteid.value);
+
     if (eliminar){
         alert("Se eliminaron los datos correctamente");
+
+        const tareaVisual = document.querySelector(`.tarea${Deleteid.value}`);
+        if (tareaVisual) {
+            tareaVisual.remove(); // Esto quita el elemento del HTML sin recargar
+        }
+        
+        inputIdEliminar.value = "";
+
+        totalMessages -=1
     }
+
     else{
         alert("hubo un error en la eliminacion de los datos")
     }
@@ -415,40 +453,15 @@ async function AgregarTarjetas (event){
 
 submitBtn.addEventListener("click", handleFormSubmit);
 messageForm.addEventListener("submit", AgregarTarjetas);
+deleteBtn.addEventListener("click", eliminarTarea)
 
 // TODO: Registrar eventos 'input' en los campos para limpiar errores al escribir
 // Pista: userNameInput.addEventListener('input', handleInputChange);
 // Pista: userMessageInput.addEventListener('input', handleInputChange);
 
 
-// ============================================
-// 6. REFLEXIÓN Y DOCUMENTACIÓN
-// ============================================
 
-/**
- * PREGUNTAS DE REFLEXIÓN:
- * 
- * 1. ¿Qué elemento del DOM estás seleccionando?
- *    R: 
- * 
- * 2. ¿Qué evento provoca el cambio en la página?
- *    R: 
- * 
- * 3. ¿Qué nuevo elemento se crea?
- *    R: 
- * 
- * 4. ¿Dónde se inserta ese elemento dentro del DOM?
- *    R: 
- * 
- * 5. ¿Qué ocurre en la página cada vez que repites la acción?
- *    R: 
- */
-
-
-// ============================================
-// 7. INICIALIZACIÓN (OPCIONAL)
-// ============================================
-
+/
 /**
  * Esta función se ejecuta cuando el DOM está completamente cargado
  */
@@ -460,21 +473,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Aquí puedes agregar cualquier inicialización adicional
     // Por ejemplo, cargar mensajes guardados del localStorage
 });
-
-
-// ============================================
-// 8. FUNCIONALIDADES ADICIONALES (BONUS)
-// ============================================
-
-/**
- * RETOS ADICIONALES OPCIONALES:
- * 
- * 1. Agregar un botón para eliminar mensajes individuales
- * 2. Implementar localStorage para persistir los mensajes
- * 3. Agregar un contador de caracteres en el textarea
- * 4. Implementar un botón para limpiar todos los mensajes
- * 5. Agregar diferentes colores de avatar según el nombre del usuario
- * 6. Permitir editar mensajes existentes
- * 7. Agregar emojis o reacciones a los mensajes
- * 8. Implementar búsqueda/filtrado de mensajes
- */

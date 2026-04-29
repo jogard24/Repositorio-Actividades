@@ -248,6 +248,7 @@ tbody tr:nth-child(even) {
 
 .form__label {
     display: block;
+    margin-top: 20px;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
     color: var(--color-text-primary);
@@ -350,6 +351,7 @@ tbody tr:nth-child(even) {
 .btn__icon {
     font-size: var(--font-size-lg);
 }
+
 
 /* ============================================
    SECCIÓN DE MENSAJES

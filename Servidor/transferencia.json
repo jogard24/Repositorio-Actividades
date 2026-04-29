@@ -1,13 +1,6 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "Ana Torres",
-      "tarea": "Introducción a las API",
-      "body": "Muy buen contenido",
-      "active": true
-    },
-    {
       "id": "2",
       "name": "Carlos Gómez",
       "tarea": "HTTP en la práctica",
@@ -79,17 +72,10 @@
     },
     {
       "name": "Ana Torres",
-      "tarea": "hola como andas",
-      "body": "hello",
-      "active": false,
-      "id": "t1G01Q3tubw"
-    },
-    {
-      "name": "Ana Torres",
-      "tarea": "hola",
+      "tarea": "gola",
       "body": "como andas",
       "active": false,
-      "id": "Stn_EmxgSTU"
+      "id": "qKuC6AcVWIk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

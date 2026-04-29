@@ -1,9 +1,13 @@
+
+//peticion mostrar
 export const request = async (url) => {
     const solicitud = await fetch(`http://localhost:3000/${url}`);
     const data = await solicitud.json();
     return data;
 };
 
+
+//Crear tareas
 export const crearTarea = async (link, nuevaTarea) => {
     const solicitud = await fetch(`http://localhost:3000/${link}`, {
         method: 'POST', // Especificamos que vamos a enviar datos
@@ -16,6 +20,7 @@ export const crearTarea = async (link, nuevaTarea) => {
     return data;
 };
 
+//Destruir tareas
 export const destroy = async (url) => {
     const solicitud = await fetch(`http://localhost:3000/${url}`, {
         method: 'DELETE', // Especificamos que queremos borrar
