@@ -1,0 +1,82 @@
+{
+  "users": [
+    {
+      "id": "2",
+      "name": "Carlos Gómez",
+      "tarea": "HTTP en la práctica",
+      "body": "Todo marcha bien",
+      "active": true
+    },
+    {
+      "id": "3",
+      "name": "María López",
+      "tarea": "HTTP en la práctica",
+      "body": "Errores al iniciar",
+      "active": false
+    },
+    {
+      "id": "4",
+      "name": "Juan Pérez",
+      "tarea": "JavaScript async",
+      "body": "manejo de las promesas",
+      "active": true
+    },
+    {
+      "id": "5",
+      "name": "Laura Martínez",
+      "tarea": "APIs REST",
+      "body": "hay que seguir",
+      "active": true
+    },
+    {
+      "id": "6",
+      "name": "Pedro Sánchez",
+      "tarea": "Manejo de datos",
+      "body": "Vamos avanzando",
+      "active": false
+    },
+    {
+      "id": "7",
+      "name": "Sofía Ramírez",
+      "tarea": "Testing de APIs",
+      "body": "Se esta realiando testeo de apis",
+      "active": true
+    },
+    {
+      "id": "8",
+      "name": "Andrés Morales",
+      "tarea": "Seguridad",
+      "body": "Se realiza testeo de seguridad",
+      "active": true
+    },
+    {
+      "id": "9",
+      "name": "Valentina Cruz",
+      "tarea": "Documentación",
+      "body": "Vamo avanzando",
+      "active": true
+    },
+    {
+      "id": "10",
+      "name": "Diego Herrera",
+      "tarea": "Integraciones",
+      "body": "Hay fallas con la integracion del equipo",
+      "active": false
+    },
+    {
+      "name": {},
+      "tarea": {},
+      "body": {},
+      "active": false,
+      "id": "0x1sL3XFCBc"
+    },
+    {
+      "name": "Ana Torres",
+      "tarea": "gola",
+      "body": "como andas",
+      "active": false,
+      "id": "qKuC6AcVWIk"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

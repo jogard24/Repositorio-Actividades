@@ -10,46 +10,108 @@
     <div class="container">
         <!-- Encabezado principal -->
         <header class="header">
-            <h1 class="header__title">Registro de Mensajes</h1>
+            <h1 class="header__title">Registro de Tareas</h1>
             <p class="header__subtitle">Practica la manipulación del DOM en tiempo real</p>
         </header>
+
+        <!-- Se realiza una seccion para poder mostrar los usuarios Registrado -->
+        <section class="container_usuarios">
+            <h1 class="container_title">Listado de Usuarios</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                    </tr>
+                </thead>
+                <tbody id="UsuariosTableBody">
+                    <!-- Las filas de tareas se agregarán aquí dinámicamente -->
+                </tbody>
+            </table>
+        </section>
 
         <!-- Formulario de entrada -->
         <section class="form-section">
             <div class="card">
-                <h2 class="card__title">Nuevo Mensaje</h2>
+                <h2 class="card__title">Nuevo Tarea</h2>
                 
+                <div class="form__index">
+                    <label for="userName" class="form__label">
+                        Nombre de usuario
+                    </label>
+                    <input 
+                        type="text" 
+                        id="userName" 
+                        class="form__input" 
+                        placeholder="Ingresa tu nombre"
+                        aria-required="true"
+                    >
+                    <span class="form__error" id="userNameError"></span>
+
+                    <button class="btn btn--primary" id="submitBtnid">
+                        <span class="btn__text">Buscar nombre</span>
+                        <span class="btn__icon">➤</span>
+                    </button>
+                </div>
+
+                <!-- Agregar tareas -->
                 <form id="messageForm" class="form" novalidate>
-                    <div class="form__group">
-                        <label for="userName" class="form__label">
-                            Nombre de usuario
-                        </label>
-                        <input 
-                            type="text" 
-                            id="userName" 
-                            class="form__input" 
-                            placeholder="Ingresa tu nombre"
-                            aria-required="true"
-                        >
-                        <span class="form__error" id="userNameError"></span>
-                    </div>
 
                     <div class="form__group">
                         <label for="userMessage" class="form__label">
-                            Tu mensaje
+                            Titulo de la tarea:
                         </label>
                         <textarea 
                             id="userMessage" 
                             class="form__input form__textarea" 
-                            placeholder="Escribe tu mensaje aquí..."
+                            placeholder="Escribe el titulo de la tarea aquí..."
                             rows="4"
                             aria-required="true"
                         ></textarea>
-                        <span class="form__error" id="userMessageError"></span>
-                    </div>
 
-                    <button type="submit" class="btn btn--primary" id="submitBtn">
-                        <span class="btn__text">Agregar Mensaje</span>
+                        <span class="form__error" id="userMessageError"></span>
+
+                        <label for="userMessage" class="form__label">
+                            Descripcion de la tarea:
+                        </label>
+
+                        <textarea 
+                            id="UserDescripcion" 
+                            class="form__input form__textarea" 
+                            placeholder="Escribe la descripcion de la tarea aquí..."
+                            rows="4"
+                            aria-required="true"
+                        ></textarea>
+
+                        <span class="form__error" id="userDescripcionError"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn--secundary" id="submitBtn">
+                        <span class="btn__text">Agregar Tarea</span>
+                        <span class="btn__icon">➤</span>
+                    </button>
+                </form>
+
+                <!-- Eliminar Tareas -->
+                <form id="deleteForm" action="" class="form">
+                    <div id="aparecerDelete" class="form__group">
+
+                        <label for="userMessage" class="form__label">
+                            Ingrese el id de la tarea a eliminar:
+                        </label>
+
+                        <input
+                            type="text" 
+                            id="Deleteid" 
+                            class="form__input" 
+                            placeholder="Ingrese el id.."
+                            aria-required="true"
+                        ></input>
+                    </div>
+                    
+                    <span class="form__error" id="idDeleteError"></span>
+                    <button class="btn btn--secundary" id="deleteBtn">
+                        <span class="btn__text">Eliminar Tarea</span>
                         <span class="btn__icon">➤</span>
                     </button>
                 </form>
@@ -60,7 +122,7 @@
         <section class="messages-section">
             <div class="messages-header">
                 <h2 class="messages-header__title">Mensajes Publicados</h2>
-                <span class="messages-header__count" id="messageCount">0 mensajes</span>
+                <span class="messages-header__count" id="messageCount">0 tareas</span>
             </div>
             
             <div id="messagesContainer" class="messages-container">
@@ -81,6 +143,6 @@
         </footer>
     </div>
 </div>
-<script src="/Servidor/script.js" type="module"></script>
+<script src="script.js" type="module"></script>
 </body>
 </html>
