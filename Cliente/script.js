@@ -29,6 +29,7 @@ const aparecerDelete = document.querySelector("#aparecerDelete")
 const submitBtn = document.getElementById('submitBtnid');
 const submitBtnTareas = document.getElementById('submitBtn');
 const deleteBtn = document.querySelector("#deleteBtn");
+const resetBtn = document.querySelector("#resetBtn")
 
 // Elementos para mostrar errores
 const userNameError = document.getElementById('userNameError');
@@ -364,14 +365,22 @@ async function handleFormSubmit(event) {
     
     //mostrar los campos habilitados
     conjuntoDatos.classList.add("form__id");
-    aparecerDelete.classList.add("form__id");   
+    aparecerDelete.classList.add("form__id");
+    
+    //Mostar boton subir tareas
     submitBtnTareas.classList.remove("btn--secundary");
     submitBtnTareas.classList.add("btn--primary");
+
+    //Mostar boton eliminar tareas
     deleteBtn.classList.remove("btn--secundary");
-    deleteBtn.classList.add("btn--primary");   
+    deleteBtn.classList.add("btn--primary");
+
+    //mostrar boton resetear formulario
+    resetBtn.classList.remove("btn--secundary");
+    resetBtn.classList.add("btn--primary"); 
 
     // Para inabilitar el campo nombre
-    userNameInput.setAttribute("disabled")
+    userNameInput.setAttribute("disabled", "true");
 
     createMessageElement(userNameInput.value, userMessageInput.value);
     
@@ -461,7 +470,12 @@ async function eliminarTarea (event){
 
 submitBtn.addEventListener("click", handleFormSubmit);
 messageForm.addEventListener("submit", AgregarTarjetas);
-deleteBtn.addEventListener("click", eliminarTarea)
+deleteBtn.addEventListener("click", eliminarTarea);
+
+resetBtn.addEventListener("click", (e) => {
+    e.reload();
+
+})
 
 // TODO: Registrar eventos 'input' en los campos para limpiar errores al escribir
 // Pista: userNameInput.addEventListener('input', handleInputChange);

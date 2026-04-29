@@ -352,6 +352,10 @@ tbody tr:nth-child(even) {
     font-size: var(--font-size-lg);
 }
 
+#resetBtn{
+    margin-top: 10px;
+}
+
 
 /* ============================================
    SECCIÓN DE MENSAJES
