@@ -29,6 +29,7 @@ const aparecerDelete = document.querySelector("#aparecerDelete")
 const submitBtn = document.getElementById('submitBtnid');
 const submitBtnTareas = document.getElementById('submitBtn');
 const deleteBtn = document.querySelector("#deleteBtn");
+const resetBtn = document.querySelector("#resetBtn")
 
 // Elementos para mostrar errores
 const userNameError = document.getElementById('userNameError');
@@ -56,34 +57,22 @@ let totalMessages = 0;
 // 2. FUNCIONES AUXILIARES
 // ============================================
 
-/**
- * Valida que un campo no esté vacío ni contenga solo espacios en blanco
- * @param {string} value - El valor a validar
- * @returns {boolean} - true si es válido, false si no lo es
- */
-
 function isValidInput(value) {
 
     return value.trim().length > 0;
     // TODO: Implementar validación
 }
 
-/**
- * Muestra un mensaje de error en un elemento específico
- * @param {HTMLElement} errorElement - Elemento donde mostrar el error
- * @param {string} message - Mensaje de error a mostrar
- */
+
 function showError(errorElement, message) {
     errorElement.textContent = message;
-
     // TODO: Implementar función para mostrar error
     // Pista: asigna el mensaje al textContent del elemento
 }
 
-/**
- * Limpia el mensaje de error de un elemento específico
- * @param {HTMLElement} errorElement - Elemento del que limpiar el error
- */
+
+//Limpia el mensaje de error de un elemento específico
+
 function clearError(errorElement) {
     errorElement.textContent = "";
     // TODO: Implementar función para limpiar errores
@@ -180,10 +169,7 @@ function validateId (a){
 
 
 
-/**
- * Obtiene la fecha y hora actual formateada
- * @returns {string} - Fecha y hora en formato legible
- */
+// Agarra el tiempo actual
 function getCurrentTimestamp() {
     const now = new Date();
     const options = { 
@@ -308,7 +294,7 @@ async function createMessageElement(userName) {
     hideEmptyState();
 }
 
-async function createTarjetas(Datos) {
+async function createTarjetas() {
     
     // PASO 1: Crear el contenedor principal del mensaje
     
@@ -323,12 +309,13 @@ async function createTarjetas(Datos) {
         const div = document.createElement("div");
     
         // Asignar la clase 'message-card'
-        div.classList.add("message-card")
-        
+        div.classList.add("message-card");
+        div.classList.add(`tarea`);
+
         div.innerHTML = `
             <div class="message-card__header">
                 <div class="message-card__user">
-                    <div class="message-card__avatar">T</div>
+                    <div class="message-card__avatar">Nueva Tarea</div>
                     <span class="message-card__username">${userNameInput.value}</span>
                 </div>
                 <span class="message-card__timestamp">${fecha}</span>
@@ -378,11 +365,23 @@ async function handleFormSubmit(event) {
     
     //mostrar los campos habilitados
     conjuntoDatos.classList.add("form__id");
-    aparecerDelete.classList.add("form__id");   
+    aparecerDelete.classList.add("form__id");
+    
+    //Mostar boton subir tareas
     submitBtnTareas.classList.remove("btn--secundary");
     submitBtnTareas.classList.add("btn--primary");
+
+    //Mostar boton eliminar tareas
     deleteBtn.classList.remove("btn--secundary");
-    deleteBtn.classList.add("btn--primary");   
+    deleteBtn.classList.add("btn--primary");
+
+    //mostrar boton resetear formulario
+    resetBtn.classList.remove("btn--secundary");
+    resetBtn.classList.add("btn--primary"); 
+
+    // Para inabilitar el campo nombre
+    userNameInput.setAttribute("disabled", "true");
+
     createMessageElement(userNameInput.value, userMessageInput.value);
     
 }
@@ -410,6 +409,7 @@ async function AgregarTarjetas (event){
         alert("no se añadieron los datos correctamente")
     }
 
+    createTarjetas();
     
 }
 
@@ -430,7 +430,14 @@ async function eliminarTarea (event){
         return
     }
 
-     if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) return;
+     if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)){
+        console.log("Datos Eliminaddos");
+     }
+     else{
+        console.log("los datos no fueron eliminados");
+        return;
+     }
+
      const eliminar = await eliminarTareaPorId(Deleteid.value);
 
     if (eliminar){
@@ -443,7 +450,7 @@ async function eliminarTarea (event){
         
         inputIdEliminar.value = "";
 
-        totalMessages -=1
+        totalMessages --;
     }
 
     else{
@@ -463,7 +470,12 @@ async function eliminarTarea (event){
 
 submitBtn.addEventListener("click", handleFormSubmit);
 messageForm.addEventListener("submit", AgregarTarjetas);
-deleteBtn.addEventListener("click", eliminarTarea)
+deleteBtn.addEventListener("click", eliminarTarea);
+
+resetBtn.addEventListener("click", (e) => {
+    e.reload();
+
+})
 
 // TODO: Registrar eventos 'input' en los campos para limpiar errores al escribir
 // Pista: userNameInput.addEventListener('input', handleInputChange);

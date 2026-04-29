@@ -2,49 +2,49 @@
   "users": [
     {
       "id": "2",
-      "name": "Carlos Gómez",
+      "name": "Carlos Gomez",
       "tarea": "HTTP en la práctica",
       "body": "Todo marcha bien",
       "active": true
     },
     {
       "id": "3",
-      "name": "María López",
+      "name": "Maria Lopez",
       "tarea": "HTTP en la práctica",
       "body": "Errores al iniciar",
       "active": false
     },
     {
       "id": "4",
-      "name": "Juan Pérez",
+      "name": "Juan Perez",
       "tarea": "JavaScript async",
       "body": "manejo de las promesas",
       "active": true
     },
     {
       "id": "5",
-      "name": "Laura Martínez",
+      "name": "Laura Martinez",
       "tarea": "APIs REST",
       "body": "hay que seguir",
       "active": true
     },
     {
       "id": "6",
-      "name": "Pedro Sánchez",
+      "name": "Pedro Sanchez",
       "tarea": "Manejo de datos",
       "body": "Vamos avanzando",
       "active": false
     },
     {
       "id": "7",
-      "name": "Sofía Ramírez",
+      "name": "Sofia Ramirez",
       "tarea": "Testing de APIs",
       "body": "Se esta realiando testeo de apis",
       "active": true
     },
     {
       "id": "8",
-      "name": "Andrés Morales",
+      "name": "Andres Morales",
       "tarea": "Seguridad",
       "body": "Se realiza testeo de seguridad",
       "active": true
@@ -64,18 +64,25 @@
       "active": false
     },
     {
-      "name": {},
-      "tarea": {},
-      "body": {},
+      "name": "Ana Torres",
+      "tarea": "hola",
+      "body": "como andas",
       "active": false,
-      "id": "0x1sL3XFCBc"
+      "id": "M88dGRzcStA"
     },
     {
       "name": "Ana Torres",
-      "tarea": "gola",
-      "body": "como andas",
+      "tarea": "hola como andas",
+      "body": "ando en gloria",
       "active": false,
-      "id": "qKuC6AcVWIk"
+      "id": "ewefzvCGY-c"
+    },
+    {
+      "name": "Ana Torres",
+      "tarea": "hola como tas",
+      "body": "sera",
+      "active": false,
+      "id": "dHN6_2zNjN4"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
