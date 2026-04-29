@@ -1,3 +1,4 @@
+import { request } from "./helper/fetch.js"
 import { BuscarNombre, obtenerTareasPorUsuario } from "./Peticiones/index.js"
 import { agregarNuevaTarea } from "./Peticiones/AgregarT.js"
 import { eliminarTareaPorId } from "./Peticiones/BorrarTarea.js"
@@ -30,6 +31,7 @@ const submitBtn = document.getElementById('submitBtnid');
 const submitBtnTareas = document.getElementById('submitBtn');
 const deleteBtn = document.querySelector("#deleteBtn");
 const updateBtn = document.getElementById("updateBtn");
+const resetBtn = document.querySelector("#resetBtn")
 
 // Elementos para mostrar errores
 const userNameError = document.getElementById('userNameError');
@@ -47,6 +49,9 @@ const emptyState = document.getElementById('emptyState');
 // Contador de mensajes
 const messageCount = document.getElementById('messageCount');
 
+// Cuerpo de la tabla para mostrar los usuarios
+const UsuariosTableBody = document.getElementById('UsuariosTableBody');
+
 // Variable para llevar el conteo de mensajes
 let totalMessages = 0;
 
@@ -55,34 +60,22 @@ let totalMessages = 0;
 // 2. FUNCIONES AUXILIARES
 // ============================================
 
-/**
- * Valida que un campo no esté vacío ni contenga solo espacios en blanco
- * @param {string} value - El valor a validar
- * @returns {boolean} - true si es válido, false si no lo es
- */
-
 function isValidInput(value) {
 
     return value.trim().length > 0;
     // TODO: Implementar validación
 }
 
-/**
- * Muestra un mensaje de error en un elemento específico
- * @param {HTMLElement} errorElement - Elemento donde mostrar el error
- * @param {string} message - Mensaje de error a mostrar
- */
+
 function showError(errorElement, message) {
     errorElement.textContent = message;
-
     // TODO: Implementar función para mostrar error
     // Pista: asigna el mensaje al textContent del elemento
 }
 
-/**
- * Limpia el mensaje de error de un elemento específico
- * @param {HTMLElement} errorElement - Elemento del que limpiar el error
- */
+
+//Limpia el mensaje de error de un elemento específico
+
 function clearError(errorElement) {
     errorElement.textContent = "";
     // TODO: Implementar función para limpiar errores
@@ -179,10 +172,7 @@ function validateId (a){
 
 
 
-/**
- * Obtiene la fecha y hora actual formateada
- * @returns {string} - Fecha y hora en formato legible
- */
+// Agarra el tiempo actual
 function getCurrentTimestamp() {
     const now = new Date();
     const options = { 
@@ -228,6 +218,41 @@ function showEmptyState() {
 // 3. CREACIÓN DE ELEMENTOS
 // ============================================
 
+
+
+// Esta funciones es para cargar los usuarios
+function renderizarTabla(users) {
+    UsuariosTableBody.innerHTML = ''; // Se limpia las tablas antes de limpiarla
+
+    // Crear un Set para trackear nombres ya agregados y evitar duplicados
+    const nombresAgregados = new Set();
+
+    users.forEach(user => {
+        // Solo agregar si el nombre no ha sido agregado antes
+        if (!nombresAgregados.has(user.name)) {
+            nombresAgregados.add(user.name);
+
+            const fila = document.createElement('tr')
+            fila.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+            `;
+            UsuariosTableBody.appendChild(fila);
+        }
+    })
+}
+
+async function cargarusers() {
+    try {
+        const users = await request('users')
+        console.log('Datos recibidos:', users);
+        renderizarTabla(users);
+    } catch (error) {
+        console.error('Error completo:', error);
+        alert('Error al cargar los users: ' + error.message)
+    }
+    
+}
 
 // funcion que me permite mostrar las tarjetas de los usuarios
 async function createMessageElement(userName) {
@@ -331,7 +356,6 @@ async function handleFormSubmit(event) {
     }
 
     // PASO 3: Obtener los valores de los campos
-     
     const confirmacionUser = await BuscarNombre(userNameInput.value);
 
     if (!confirmacionUser){
@@ -344,11 +368,23 @@ async function handleFormSubmit(event) {
     
     //mostrar los campos habilitados
     conjuntoDatos.classList.add("form__id");
-    aparecerDelete.classList.add("form__id");   
+    aparecerDelete.classList.add("form__id");
+    
+    //Mostar boton subir tareas
     submitBtnTareas.classList.remove("btn--secundary");
     submitBtnTareas.classList.add("btn--primary");
+
+    //Mostar boton eliminar tareas
     deleteBtn.classList.remove("btn--secundary");
-    deleteBtn.classList.add("btn--primary");   
+    deleteBtn.classList.add("btn--primary");
+
+    //mostrar boton resetear formulario
+    resetBtn.classList.remove("btn--secundary");
+    resetBtn.classList.add("btn--primary"); 
+
+    // Para inabilitar el campo nombre
+    userNameInput.setAttribute("disabled", "true");
+
     createMessageElement(userNameInput.value, userMessageInput.value);
     
 }
@@ -397,7 +433,14 @@ async function eliminarTarea (event){
         return
     }
 
-     if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) return;
+     if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)){
+        console.log("Datos Eliminaddos");
+     }
+     else{
+        console.log("los datos no fueron eliminados");
+        return;
+     }
+
      const eliminar = await eliminarTareaPorId(Deleteid.value);
 
     if (eliminar){
@@ -410,7 +453,7 @@ async function eliminarTarea (event){
         
         inputIdEliminar.value = "";
 
-        totalMessages -=1
+        totalMessages --;
     }
 
     else{
@@ -430,7 +473,12 @@ async function eliminarTarea (event){
 
 submitBtn.addEventListener("click", handleFormSubmit);
 messageForm.addEventListener("submit", AgregarTarjetas);
-deleteBtn.addEventListener("click", eliminarTarea)
+deleteBtn.addEventListener("click", eliminarTarea);
+
+resetBtn.addEventListener("click", (e) => {
+    e.reload();
+
+})
 
 // TODO: Registrar eventos 'input' en los campos para limpiar errores al escribir
 // Pista: userNameInput.addEventListener('input', handleInputChange);
@@ -438,13 +486,13 @@ deleteBtn.addEventListener("click", eliminarTarea)
 
 
 
-/
 /**
  * Esta función se ejecuta cuando el DOM está completamente cargado
  */
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ DOM completamente cargado');
     console.log('📝 Aplicación de registro de mensajes iniciada');
+    cargarusers();
     
     // Aquí puedes agregar cualquier inicialización adicional
     // Por ejemplo, cargar mensajes guardados del localStorage
