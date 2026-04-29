@@ -1,8 +1,9 @@
+//Las importaciones de las funciones con el json-server
 import { request } from "./helper/fetch.js"
 import { BuscarNombre, obtenerTareasPorUsuario, BuscarIdTarea } from "./Peticiones/index.js"
 import { agregarNuevaTarea } from "./Peticiones/AgregarT.js"
 import { eliminarTareaPorId } from "./Peticiones/BorrarTarea.js"
-import { updateTarea } from "./helper/Update.js";
+import { updateTarea } from "./helper/index.js";
 
 // ============================================
 // 1. SELECCIÓN DE ELEMENTOS DEL DOM
@@ -13,7 +14,7 @@ import { updateTarea } from "./helper/Update.js";
  * Usamos getElementById para obtener referencias a los elementos únicos.
  */
 
-// Formulario
+// Formularios
 const messageForm = document.getElementById('messageForm');
 const eliminarTares = document.querySelector("#deleteForm")
 const actualizarTareas = document.querySelector("#updateForm")
@@ -30,8 +31,7 @@ const aparecerDelete = document.querySelector("#aparecerDelete");
 const Updateid = document.querySelector("#updateid");
 const ActualizarT = document.querySelector("#ActualizarT");
 
-const aparecerUpdate = document.querySelector("#aparecerUpdate")
-// Botón de envío
+// Botónes de envío
 const submitBtn = document.getElementById('submitBtnid');
 const submitBtnTareas = document.getElementById('submitBtn');
 const deleteBtn = document.querySelector("#deleteBtn");
@@ -65,6 +65,7 @@ let totalMessages = 0;
 // 2. FUNCIONES AUXILIARES
 // ============================================
 
+//Funcion que valida si los campos estan vacios
 function isValidInput(value) {
 
     return value.trim().length > 0;
