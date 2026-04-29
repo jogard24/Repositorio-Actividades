@@ -1,3 +1,4 @@
+import { request } from "./helper/fetch.js"
 import { BuscarNombre, obtenerTareasPorUsuario } from "./Peticiones/index.js"
 import { agregarNuevaTarea } from "./Peticiones/AgregarT.js"
 import { eliminarTareaPorId } from "./Peticiones/BorrarTarea.js"
@@ -43,6 +44,9 @@ const emptyState = document.getElementById('emptyState');
 
 // Contador de mensajes
 const messageCount = document.getElementById('messageCount');
+
+// Cuerpo de la tabla para mostrar los usuarios
+const UsuariosTableBody = document.getElementById('UsuariosTableBody');
 
 // Variable para llevar el conteo de mensajes
 let totalMessages = 0;
@@ -226,6 +230,41 @@ function showEmptyState() {
 // ============================================
 
 
+
+// Esta funciones es para cargar los usuarios
+function renderizarTabla(users) {
+    UsuariosTableBody.innerHTML = ''; // Se limpia las tablas antes de limpiarla
+
+    // Crear un Set para trackear nombres ya agregados y evitar duplicados
+    const nombresAgregados = new Set();
+
+    users.forEach(user => {
+        // Solo agregar si el nombre no ha sido agregado antes
+        if (!nombresAgregados.has(user.name)) {
+            nombresAgregados.add(user.name);
+
+            const fila = document.createElement('tr')
+            fila.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+            `;
+            UsuariosTableBody.appendChild(fila);
+        }
+    })
+}
+
+async function cargarusers() {
+    try {
+        const users = await request('users')
+        console.log('Datos recibidos:', users);
+        renderizarTabla(users);
+    } catch (error) {
+        console.error('Error completo:', error);
+        alert('Error al cargar los users: ' + error.message)
+    }
+    
+}
+
 // funcion que me permite mostrar las tarjetas de los usuarios
 async function createMessageElement(userName) {
     // TODO: Implementar la creación de un nuevo mensaje
@@ -328,7 +367,6 @@ async function handleFormSubmit(event) {
     }
 
     // PASO 3: Obtener los valores de los campos
-     
     const confirmacionUser = await BuscarNombre(userNameInput.value);
 
     if (!confirmacionUser){
@@ -442,6 +480,7 @@ deleteBtn.addEventListener("click", eliminarTarea)
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ DOM completamente cargado');
     console.log('📝 Aplicación de registro de mensajes iniciada');
+    cargarusers();
     
     // Aquí puedes agregar cualquier inicialización adicional
     // Por ejemplo, cargar mensajes guardados del localStorage
