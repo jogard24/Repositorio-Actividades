@@ -1,6 +1,7 @@
+import { ip } from "./IP.js"
 //Crear tareas
 export const crearTarea = async (link, nuevaTarea) => {
-    const solicitud = await fetch(`http://localhost:3000/${link}`, {
+    const solicitud = await fetch(`http://${ip}:3000/${link}`, {
         method: 'POST', // Especificamos que vamos a enviar datos
         headers: {
             'Content-Type': 'application/json' // Le decimos al servidor que enviamos un JSON

@@ -1,6 +1,8 @@
+import { ip } from "./IP.js"
+
 //Destruir tareas
 export const destroy = async (url) => {
-    const solicitud = await fetch(`http://localhost:3000/${url}`, {
+    const solicitud = await fetch(`http://${ip}:3000/${url}`, {
         method: 'DELETE', // Especificamos que queremos borrar
         headers: {
             'Content-Type': 'application/json'
