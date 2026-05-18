@@ -83,6 +83,13 @@
       "body": "sera",
       "active": false,
       "id": "dHN6_2zNjN4"
+    },
+    {
+      "name": "Carlos Gomez",
+      "tarea": "Terminar la tarea",
+      "body": "Vamos a termina la tarea de nuestro proyecto integrador.",
+      "active": false,
+      "id": "SfA-jOTr9OM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -1,9 +1,7 @@
 //Las importaciones de las funciones con el json-server
-import { request } from "./helper/fetch.js"
-import { BuscarNombre, obtenerTareasPorUsuario, BuscarIdTarea } from "./Peticiones/index.js"
-import { agregarNuevaTarea } from "./Peticiones/AgregarT.js"
-import { eliminarTareaPorId } from "./Peticiones/BorrarTarea.js"
-import { updateTarea } from "./helper/index.js";
+import { request, updateTarea } from "./helper/index.js"
+import { BuscarNombre, obtenerTareasPorUsuario, BuscarIdTarea, agregarNuevaTarea, eliminarTareaPorId } from "./Peticiones/index.js"
+
 
 // ============================================
 // 1. SELECCIÓN DE ELEMENTOS DEL DOM
@@ -87,10 +85,6 @@ function clearError(errorElement) {
     // TODO: Implementar función para limpiar errores
 }
 
-/**
- * Valida todos los campos del formulario
- * @returns {boolean} - true si todos los campos son válidos, false si alguno no lo es
- */
 
 //  Validavion de los campos titulo de tarea y descripcion de tarea
 function validateForm(a) {
@@ -240,6 +234,7 @@ function renderizarDatalist(users) {
     });
 }
 
+// Para que me muestre los usuarios a los que estoy buscando
 userNameInput.addEventListener('input', () => {
     const query = userNameInput.value.toLowerCase();
 
@@ -252,8 +247,6 @@ userNameInput.addEventListener('input', () => {
         }
     });
 });
-
-
 
 
 
@@ -548,17 +541,7 @@ messageForm.addEventListener("submit", AgregarTarjetas);
 
 updateBtn.addEventListener("click", actualizarTarea);
 deleteBtn.addEventListener("click", eliminarTarea);
-resetBtn.addEventListener("click", (e) => {
-    e.reload();
-
-})
-
-    // TODO: Registrar eventos 'input' en los campos para limpiar errores al escribir
-    // Pista: userNameInput.addEventListener('input', handleInputChange);
-    // Pista: userMessageInput.addEventListener('input', handleInputChange);
-
-
-
+resetBtn.addEventListener("click", (e) => { e.reload();});
 /**
  * Esta función se ejecuta cuando el DOM está completamente cargado
  */

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Mensajes - Ejercicio DOM</title>
+    <title>Grupo 2 - Ejercicio DOM</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -62,13 +62,14 @@
                         <label for="userMessage" class="form__label">
                             Titulo de la tarea:
                         </label>
-                        <textarea 
+                        <input 
                             id="userMessage" 
-                            class="form__input form__textarea" 
+                            class="form__input" 
                             placeholder="Escribe el titulo de la tarea aquí..."
+                            type = "text"
                             rows="4"
                             aria-required="true"
-                        ></textarea>
+                        ></input>
 
                         <span class="form__error" id="userMessageError"></span>
 
