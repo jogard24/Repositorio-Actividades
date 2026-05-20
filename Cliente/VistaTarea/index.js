@@ -1,2 +1,2 @@
 export * from "./TareasControlador";
-export * from "./mostrarTareas";
+export * from "./VistaTareas";
