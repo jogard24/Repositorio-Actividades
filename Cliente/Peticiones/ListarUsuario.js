@@ -2,6 +2,7 @@ import { request } from "../helper/index.js";
 
 export function listarUsuario(){
 
+
     function renderizarDatalist(users) {
         userNameList.innerHTML = '';
         const nombresAgregados = new Set();
@@ -74,5 +75,6 @@ export function listarUsuario(){
 
     }
 
+    
     cargarusers();
 }

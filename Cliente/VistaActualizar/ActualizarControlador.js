@@ -6,9 +6,7 @@ export const actualizarControlador = () => {
     const editable = document.querySelector('div > div');
     
     const userNameList = document.getElementById('userNameList');
-
     listarUsuario();
-
 
     editable.innerHTML = actualizar();
     

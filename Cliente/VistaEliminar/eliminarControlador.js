@@ -6,5 +6,5 @@ export const eliminarControlador = () => {
     const editable = document.querySelector('div > div');
     listarUsuario();
 
-    
+    editable.innerHTML = eliminar();
 }
