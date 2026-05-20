@@ -14,14 +14,11 @@ import { enrrutador } from "./router/router.js";
 const cambio = document.querySelector(".contenidoP");
 
 const arrancar = async () => {
+    console.log("Cambios");
+    
   await enrrutador(cambio)
 }
 
-
-window.addEventListener("hashchange", arrancar);
-
-//la parte de arrancar debe ir como esta arriba
-document.addEventListener("DOMContentLoaded", arrancar());
 
 //Se buscan los elementos dentro del contenedor principal
 
@@ -75,6 +72,10 @@ const UsuariosTableBody = cambio.querySelector('#UsuariosTableBody');
 // Variable para llevar el conteo de mensajes
 let totalMessages = 0;
 
+window.addEventListener("hashchange", arrancar);
+
+//la parte de arrancar debe ir como esta arriba
+document.addEventListener("DOMContentLoaded", arrancar);
 
 // ============================================
 // 2. FUNCIONES AUXILIARES
@@ -295,19 +296,7 @@ function renderizarTabla(users) {
     })
 }
 
-async function cargarusers() {
-    try {
-        const users = await request('users')
-        console.log('Datos recibidos:', users);
-        renderizarTabla(users);
-        renderizarDatalist(users);
 
-    } catch (error) {
-        console.error('Error completo:', error);
-        alert('Error al cargar los users: ' + error.message)
-    }
-
-}
 
 // funcion que me permite mostrar las tarjetas de los usuarios
 async function createMessageElement(userName) {
@@ -444,7 +433,7 @@ async function handleFormSubmit() {
     console.log(userMessageInput);
     
     
-        createMessageElement(userNameInput.value);
+    createMessageElement(userNameInput.value);
 }
 
 async function AgregarTarjetas(event) {
@@ -613,7 +602,6 @@ cambio.addEventListener("click", (evento) => {
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ DOM completamente cargado');
     console.log('📝 Aplicación de registro de mensajes iniciada');
-    cargarusers();
     
     // Aquí puedes agregar cualquier inicialización adicional
     // Por ejemplo, cargar mensajes guardados del localStorage
