@@ -1,22 +1,7 @@
 export const eliminar = () => {
   return `
     <!-- Se realiza una seccion para poder mostrar los usuarios Registrado -->
-        <section class="container_usuarios">
-            <h1 class="container_title">Listado de Usuarios</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>User</th>
-                    </tr>
-                </thead>
-                <tbody id="UsuariosTableBody">
-                    <!-- Las filas de tareas se agregarán aquí dinámicamente -->
-                </tbody>
-            </table>
-        </section>
-
-        <!-- Formulario de entrada -->
+    <!-- Formulario de entrada -->
         <section class="form-section">
             <div class="card">
                 <h2 class="card__title">Nueva Tarea</h2>
@@ -72,9 +57,20 @@ export const eliminar = () => {
                 </form>
             </div>
         </section>
-
-        
-
+        <section class="container_usuarios">
+            <h1 class="container_title">Listado de Usuarios</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                    </tr>
+                </thead>
+                <tbody id="UsuariosTableBody">
+                    <!-- Las filas de tareas se agregarán aquí dinámicamente -->
+                </tbody>
+            </table>
+        </section>
         <!-- Área de mensajes -->
         <section class="messages-section">
             <div class="messages-header">
