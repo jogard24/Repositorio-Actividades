@@ -92,18 +92,11 @@
       "id": "SfA-jOTr9OM"
     },
     {
-      "name": "Carlos Gomez",
-      "tarea": "Esto es una tarea",
-      "body": "Este es el ejemplo de una tarea\n",
+      "name": "Ana Torres",
+      "tarea": "Hola",
+      "body": "Estamos revisando nuestro papaya",
       "active": false,
-      "id": "0s817zaKdko"
-    },
-    {
-      "name": "Carlos Gomez",
-      "tarea": "Esto es una tarea",
-      "body": "Este es el ejemplo de una tarea\n",
-      "active": false,
-      "id": "i3RHGTJOxlc"
+      "id": "lM9-bH6bgzU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

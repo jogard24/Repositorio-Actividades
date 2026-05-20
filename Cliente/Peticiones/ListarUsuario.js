@@ -2,6 +2,10 @@ import { request } from "../helper/index.js";
 
 export function listarUsuario(){
 
+    const userNameInput = document.querySelector('#userName');
+    const userNameList = document.getElementById('userNameList');
+    const UsuariosTableBody = document.querySelector('#UsuariosTableBody');
+
     function renderizarDatalist(users) {
         userNameList.innerHTML = '';
         const nombresAgregados = new Set();
@@ -74,5 +78,6 @@ export function listarUsuario(){
 
     }
 
+    
     cargarusers();
 }
