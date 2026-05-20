@@ -6,9 +6,9 @@ import { vistaTareas } from "../VistaTarea/VistaTareas.js";
 import { vistaAgregar, agregarControlador } from "../VistaAgregar/index.js"
 
 
-import { vistaEliminar } from "../VistaEliminar/vistaEliminar.js"
-import { eliminarControlador } from "../VistaEliminar/eliminarControlador.js"
-
+// import { vistaEliminar } from "../VistaEliminar/vistaEliminar.js"
+// import { eliminarControlador } from "../VistaEliminar/eliminarControlador.js"
+import { eliminarControlador, vistaEliminar } from "../VistaEliminar/index.js"
 
 // import { vistaActualizar } from "../VistaActualizar/vistaActualizar.js"
 // import { actualizarControlador } from "../VistaActualizar/ActualizarControlador.js"
