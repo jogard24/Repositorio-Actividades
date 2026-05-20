@@ -1,4 +1,4 @@
-export const vistaAgregar = () => {
+export const vistaEliminar = () => {
   return `
         <div></div>    
   `;

@@ -11,49 +11,63 @@ import { enrrutador } from "./router/router.js";
  * Seleccionamos los elementos del DOM que necesitamos manipular.
  * Usamos getElementById para obtener referencias a los elementos únicos.
  */
+const cambio = document.querySelector(".contenidoP");
+
+const arrancar = async () => {
+  await enrrutador(cambio)
+}
+
+
+window.addEventListener("hashchange", arrancar);
+
+//la parte de arrancar debe ir como esta arriba
+document.addEventListener("DOMContentLoaded", arrancar());
+
+//Se buscan los elementos dentro del contenedor principal
 
 // Formularios
-const messageForm = document.getElementById('messageForm');
-const eliminarTares = document.querySelector("#deleteForm")
-const actualizarTareas = document.querySelector("#updateForm")
+const messageForm = cambio.querySelector('#messageForm');
+const eliminarTares = cambio.querySelector("#deleteForm")
+const actualizarTareas = cambio.querySelector("#updateForm")
 
 // Campos de entrada
-const userNameInput = document.getElementById('userName');
-const userMessageInput = document.getElementById('userMessage');
-const userDesripcionInput = document.getElementById('UserDescripcion');
-const conjuntoDatos = document.querySelector(".form__group");
+const userNameInput = cambio.querySelector('#userName');
+const userMessageInput = cambio.querySelector('#userMessage');
+const userDesripcionInput = cambio.querySelector('#UserDescripcion');
+const conjuntoDatos = cambio.querySelector(".form__group");
 
-const Deleteid = document.querySelector("#Deleteid");
-const aparecerDelete = document.querySelector("#aparecerDelete");
+const Deleteid = cambio.querySelector("#Deleteid");
+const aparecerDelete = cambio.querySelector("#aparecerDelete");
 
-const Updateid = document.querySelector("#updateid");
-const ActualizarT = document.querySelector("#ActualizarT");
+const Updateid = cambio.querySelector("#updateid");
+const AparecerUpdate = cambio.querySelector("#aparecerUpdate");
+const ActualizarT = cambio.querySelector("#ActualizarT");
 
 // Botónes de envío
-const submitBtn = document.getElementById('submitBtnid');
-const submitBtnTareas = document.getElementById('submitBtn');
-const deleteBtn = document.querySelector("#deleteBtn");
-const updateBtn = document.getElementById("updateBtn");
-const resetBtn = document.querySelector("#resetBtn")
+const submitBtn = cambio.querySelector('#submitBtnid');
+const submitBtnTareas = cambio.querySelector('#submitBtn');
+const deleteBtn = cambio.querySelector("#deleteBtn");
+const updateBtn = cambio.querySelector("#updateBtn");
+const resetBtn = cambio.querySelector("#resetBtn")
 
 // Elementos para mostrar errores
-const userNameError = document.getElementById('userNameError');
-const userMessageError = document.getElementById('userMessageError');
-const userDescripcionError = document.getElementById(`userDescripcionError`);
-const idDeleteError = document.querySelector("#idDeleteError");
-const idUpdateError = document.querySelector("#idUpdateError");
+const userNameError = cambio.querySelector('#userNameError');
+const userMessageError = cambio.querySelector('#userMessageError');
+const userDescripcionError = cambio.querySelector(`#userDescripcionError`);
+const idDeleteError = cambio.querySelector("#idDeleteError");
+const idUpdateError = cambio.querySelector("#idUpdateError");
 
 // Contenedor donde se mostrarán los mensajes
-const messagesContainer = document.getElementById('messagesContainer');
+const messagesContainer = cambio.querySelector('#messagesContainer');
 
 // Estado vacío (mensaje que se muestra cuando no hay mensajes)
-const emptyState = document.getElementById('emptyState');
+const emptyState = cambio.querySelector('#emptyState');
 
 // Contador de mensajes
-const messageCount = document.getElementById('messageCount');
+const messageCount = cambio.querySelector('#messageCount');
 
 // Cuerpo de la tabla para mostrar los usuarios
-const UsuariosTableBody = document.getElementById('UsuariosTableBody');
+const UsuariosTableBody = cambio.querySelector('#UsuariosTableBody');
 
 //Para poder ambiar entre los formularios de la pagina
 
@@ -94,7 +108,6 @@ function validateForm(a) {
 
     const userMessage = userMessageInput.value;
     const UserDescripcion = userDesripcionInput.value;
-    const UserDelete = Deleteid.value;
 
     let isValid = true;
 
@@ -238,18 +251,25 @@ function renderizarDatalist(users) {
 }
 
 // Para que me muestre los usuarios a los que estoy buscando
-userNameInput.addEventListener('input', () => {
-    const query = userNameInput.value.toLowerCase();
-
-    Array.from(UsuariosTableBody.querySelectorAll('tr')).forEach(tr => {
-        const nombre = tr.children[1].textContent.toLowerCase();
-        if (nombre.includes(query)) {
-            tr.style.display = ''; // mostrar
-        } else {
-            tr.style.display = 'none'; // ocultar
-        }
-    });
+cambio.addEventListener("input", (evento) => {
+    // Verificamos si el origen del evento fue nuestro input específico
+    if (evento.target && evento.target.id === "userName") {
+        
+        userNameInput.addEventListener('input', () => {
+            const query = userNameInput.value.toLowerCase();
+        
+            Array.from(UsuariosTableBody.querySelectorAll('tr')).forEach(tr => {
+                const nombre = tr.children[1].textContent.toLowerCase();
+                if (nombre.includes(query)) {
+                    tr.style.display = ''; // mostrar
+                } else {
+                    tr.style.display = 'none'; // ocultar
+                }
+            });
+        });
+    }
 });
+
 
 
 
@@ -376,11 +396,8 @@ async function createTarjetas() {
 // 4. MANEJO DE EVENTOS
 // ============================================
 
-async function handleFormSubmit(event) {
+async function handleFormSubmit() {
     // TODO: Implementar el manejador del evento submit
-
-    // PASO 1: Prevenir el comportamiento por defecto del formulario
-    event.preventDefault();
 
     // PASO 2: Validar el formulario
     const formularioV = validateId();
@@ -402,35 +419,36 @@ async function handleFormSubmit(event) {
     }
 
     //mostrar los campos habilitados
-    conjuntoDatos.classList.add("form__id");
-    aparecerDelete.classList.add("form__id");
-    aparecerUpdate.classList.add("form__id");
+    conjuntoDatos?.classList.add("form__id");
+    aparecerDelete?.classList.add("form__id");
+    AparecerUpdate?.classList.add("form__id");
     
     //Mostar boton subir tareas
-    submitBtnTareas.classList.remove("btn--secundary");
-    submitBtnTareas.classList.add("btn--primary");
+    submitBtnTareas?.classList.remove("btn--secundary");
+    submitBtnTareas?.classList.add("btn--primary");
 
-    updateBtn.classList.add("btn--primary");
-    updateBtn.classList.remove("btn--secundary");
+    updateBtn?.classList.add("btn--primary");
+    updateBtn?.classList.remove("btn--secundary");
 
     //Mostar boton eliminar tareas
-    deleteBtn.classList.remove("btn--secundary");
-    deleteBtn.classList.add("btn--primary");
+    deleteBtn?.classList.remove("btn--secundary");
+    deleteBtn?.classList.add("btn--primary");
 
     //mostrar boton resetear formulario
-    resetBtn.classList.remove("btn--secundary");
-    resetBtn.classList.add("btn--primary");
+    resetBtn?.classList.remove("btn--secundary");
+    resetBtn?.classList.add("btn--primary");
 
     // Para inabilitar el campo nombre
     userNameInput.setAttribute("disabled", "true");
-
-    createMessageElement(userNameInput.value, userMessageInput.value);
-
+    console.log(userNameInput);
+    console.log(userMessageInput);
+    
+    
+        createMessageElement(userNameInput.value);
 }
 
 async function AgregarTarjetas(event) {
 
-    event.preventDefault();
 
     const validacionForm = validateForm();
 
@@ -457,7 +475,6 @@ async function AgregarTarjetas(event) {
 
 async function actualizarTarea (event){
 
-    event.preventDefault();
 
     const ValidacionTarea = await BuscarIdTarea(Updateid.value);
     console.log(ValidacionTarea);
@@ -487,8 +504,6 @@ async function actualizarTarea (event){
 
 async function eliminarTarea(event) {
 
-    event.preventDefault();
-
     const validacionForm = comprobarEliminacion();
     console.log(validacionForm);
 
@@ -501,7 +516,7 @@ async function eliminarTarea(event) {
         return
     }
 
-    if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) {
+    if (confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) {
         console.log("Datos Eliminaddos");
     }
     else {
@@ -519,7 +534,7 @@ async function eliminarTarea(event) {
             tareaVisual.remove(); // Esto quita el elemento del HTML sin recargar
         }
 
-        inputIdEliminar.value = "";
+        Deleteid.value = "";
 
         totalMessages--;
     }
@@ -539,15 +554,57 @@ async function eliminarTarea(event) {
 // 5. REGISTRO DE EVENTOS
 // ============================================
 
+cambio.addEventListener("click", (evento) => {
+    // Verificamos si el origen del evento fue nuestro input específico
+    if (evento.target && evento.target.id === "submitBtnid") {
 
-submitBtn.addEventListener("click", handleFormSubmit);
-messageForm.addEventListener("submit", AgregarTarjetas);
+        evento.preventDefault();
+        handleFormSubmit();
+    }
+});
 
-updateBtn.addEventListener("click", actualizarTarea);
-deleteBtn.addEventListener("click", eliminarTarea);
-resetBtn.addEventListener("click", (e) => { e.reload();});
+cambio.addEventListener("submit", (evento) => {
+    // Verificamos si el origen del evento fue nuestro input específico
+    if (evento.target && evento.target.id === "messageForm") {
 
-window.addEventListener("hashchange", )
+        evento.preventDefault();
+        AgregarTarjetas();
+    }
+});
+
+cambio.addEventListener("click", (evento) => {
+    // Verificamos si el origen del evento fue nuestro input específico
+    if (evento.target && evento.target.id === "resetBtn") {
+     
+        evento.preventDefault();
+        evento.reload();
+    }
+});
+
+
+cambio.addEventListener("click", (evento) => {
+
+    if(evento.target && evento.target.id === "updateBtn"){
+
+        evento.preventDefault();
+        actualizarTarea()
+    }
+
+});
+
+
+cambio.addEventListener("click", (evento) => {
+
+    if(evento.target && evento.target.id === "deleteBtn"){
+
+        evento.preventDefault();
+        eliminarTarea()
+    }
+
+});
+
+
+
 
 
 /**

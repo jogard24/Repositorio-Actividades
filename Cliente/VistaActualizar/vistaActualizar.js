@@ -1,4 +1,4 @@
-export const vistaAgregar = () => {
+export const vistaActualizar = () => {
   return `
         <div></div>    
   `;

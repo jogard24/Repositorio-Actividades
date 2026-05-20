@@ -1,8 +1,6 @@
-
-
-
-
-        <!-- Se realiza una seccion para poder mostrar los usuarios Registrado -->
+export const actualizar = () => {
+  return `
+    <!-- Se realiza una seccion para poder mostrar los usuarios Registrado -->
         <section class="container_usuarios">
             <h1 class="container_title">Listado de Usuarios</h1>
             <table>
@@ -47,45 +45,6 @@
 
                 </div>
                 <!-- Agregar tareas -->
-                <form id="messageForm" class="form" novalidate>
-
-                    <div class="form__group">
-                        <label for="userMessage" class="form__label">
-                            Titulo de la tarea:
-                        </label>
-                        <input 
-                            id="userMessage" 
-                            class="form__input" 
-                            placeholder="Escribe el titulo de la tarea aquí..."
-                            type = "text"
-                            rows="4"
-                            aria-required="true"
-                        ></input>
-
-                        <span class="form__error" id="userMessageError"></span>
-
-                        <label for="userMessage" class="form__label">
-                            Descripcion de la tarea:
-                        </label>
-
-                        <textarea 
-                            id="UserDescripcion" 
-                            class="form__input form__textarea" 
-                            placeholder="Escribe la descripcion de la tarea aquí..."
-                            rows="4"
-                            aria-required="true"
-                        ></textarea>
-
-                        <span class="form__error" id="userDescripcionError"></span>
-                    </div>
-                    
-                    <button type="submit" class="btn btn--secundary" id="submitBtn">
-                        <span class="btn__text">Agregar Tarea</span>
-                        <span class="btn__icon">➤</span>
-                    </button>
-                </form>
-
-                <!-- Actualizar tareas -->
                 <form id="updateForm" action="" class="form">
                     <div id="aparecerUpdate" class="form__group">
                         <label for="updateid" class="form__label">
@@ -118,37 +77,12 @@
                         <span class="btn__text">Actualizar tarea</span>
                         <span class="btn__icon">➤</span>
                     </button>
-                </form>
-                
-                <!-- Eliminar Tareas -->
-                <form id="deleteForm" action="" class="form">
-                    <div id="aparecerDelete" class="form__group">
-
-                        <label for="userMessage" class="form__label">
-                            Ingrese el id de la tarea a eliminar:
-                        </label>
-
-                        <input
-                            type="text" 
-                            id="Deleteid" 
-                            class="form__input" 
-                            placeholder="Ingrese el id.."
-                            aria-required="true"
-                        ></input>
-                    </div>
-                    
-                    <span class="form__error" id="idDeleteError"></span>
-                    <button class="btn btn--secundary" id="deleteBtn">
-                        <span class="btn__text">Eliminar Tarea</span>
-                        <span class="btn__icon">➤</span>
-                    </button>
 
                     <button type="submit" class="btn btn--secundary" id="resetBtn">
                         <span class="btn__text">Recargar Formulario</span>
                         <span class="btn__icon">➤</span>
                     </button>
                 </form>
-
             </div>
         </section>
 
@@ -178,3 +112,5 @@
         <footer class="footer">
             <p class="footer__text">Ejercicio de manipulación del DOM | SENA - Desarrollo Web</p>
         </footer>
+  `;
+}
