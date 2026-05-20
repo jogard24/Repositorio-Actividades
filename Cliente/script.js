@@ -1,7 +1,7 @@
 //Las importaciones de las funciones con el json-server
 import { request, updateTarea } from "./helper/index.js"
 import { BuscarNombre, obtenerTareasPorUsuario, BuscarIdTarea, agregarNuevaTarea, eliminarTareaPorId } from "./Peticiones/index.js"
-
+import { enrrutador } from "./router/router.js";
 
 // ============================================
 // 1. SELECCIÓN DE ELEMENTOS DEL DOM
@@ -11,53 +11,71 @@ import { BuscarNombre, obtenerTareasPorUsuario, BuscarIdTarea, agregarNuevaTarea
  * Seleccionamos los elementos del DOM que necesitamos manipular.
  * Usamos getElementById para obtener referencias a los elementos únicos.
  */
+const cambio = document.querySelector(".contenidoP");
+
+const arrancar = async () => {
+    console.log("Cambios");
+    
+  await enrrutador(cambio)
+}
+
+
+//Se buscan los elementos dentro del contenedor principal
 
 // Formularios
-const messageForm = document.getElementById('messageForm');
-const eliminarTares = document.querySelector("#deleteForm")
-const actualizarTareas = document.querySelector("#updateForm")
+const messageForm = cambio.querySelector('#messageForm');
+const eliminarTares = cambio.querySelector("#deleteForm")
+const actualizarTareas = cambio.querySelector("#updateForm")
 
 // Campos de entrada
-const userNameInput = document.getElementById('userName');
-const userMessageInput = document.getElementById('userMessage');
-const userDesripcionInput = document.getElementById('UserDescripcion');
-const conjuntoDatos = document.querySelector(".form__group");
+// const userNameInput = cambio.querySelector('#userName');
+// const userMessageInput = cambio.querySelector('#userMessage');
+const userDesripcionInput = cambio.querySelector('#UserDescripcion');
+// const conjuntoDatos = cambio.querySelector(".form__group");
 
-const Deleteid = document.querySelector("#Deleteid");
-const aparecerDelete = document.querySelector("#aparecerDelete");
+const Deleteid = cambio.querySelector("#Deleteid");
+// const aparecerDelete = cambio.querySelector("#aparecerDelete");
 
-const Updateid = document.querySelector("#updateid");
-const ActualizarT = document.querySelector("#ActualizarT");
+const Updateid = cambio.querySelector("#updateid");
+// const AparecerUpdate = cambio.querySelector("#aparecerUpdate");
+const ActualizarT = cambio.querySelector("#ActualizarT");
 
-// Botónes de envío
-const submitBtn = document.getElementById('submitBtnid');
-const submitBtnTareas = document.getElementById('submitBtn');
-const deleteBtn = document.querySelector("#deleteBtn");
-const updateBtn = document.getElementById("updateBtn");
-const resetBtn = document.querySelector("#resetBtn")
+// // Botónes de envío
+// // const submitBtn = cambio.querySelector('#submitBtnid');
+// const submitBtnTareas = cambio.querySelector('#submitBtn');
+// const deleteBtn = cambio.querySelector("#deleteBtn");
+// const updateBtn = cambio.querySelector("#updateBtn");
+// const resetBtn = cambio.querySelector("#resetBtn")
 
 // Elementos para mostrar errores
-const userNameError = document.getElementById('userNameError');
-const userMessageError = document.getElementById('userMessageError');
-const userDescripcionError = document.getElementById(`userDescripcionError`);
-const idDeleteError = document.querySelector("#idDeleteError");
-const idUpdateError = document.querySelector("#idUpdateError");
+const userNameError = cambio.querySelector('#userNameError');
+const userMessageError = cambio.querySelector('#userMessageError');
+const userDescripcionError = cambio.querySelector(`#userDescripcionError`);
+const idDeleteError = cambio.querySelector("#idDeleteError");
+const idUpdateError = cambio.querySelector("#idUpdateError");
 
 // Contenedor donde se mostrarán los mensajes
-const messagesContainer = document.getElementById('messagesContainer');
+const messagesContainer = cambio.querySelector('#messagesContainer');
 
-// Estado vacío (mensaje que se muestra cuando no hay mensajes)
-const emptyState = document.getElementById('emptyState');
+// // Estado vacío (mensaje que se muestra cuando no hay mensajes)
+// const emptyState = cambio.querySelector('#emptyState');
 
 // Contador de mensajes
-const messageCount = document.getElementById('messageCount');
+const messageCount = cambio.querySelector('#messageCount');
 
 // Cuerpo de la tabla para mostrar los usuarios
-const UsuariosTableBody = document.getElementById('UsuariosTableBody');
+// const UsuariosTableBody = cambio.querySelector('#UsuariosTableBody');
+
+//Para poder ambiar entre los formularios de la pagina
+
 
 // Variable para llevar el conteo de mensajes
-let totalMessages = 0;
+// let totalMessages = 0;
 
+window.addEventListener("hashchange", arrancar);
+
+//la parte de arrancar debe ir como esta arriba
+document.addEventListener("DOMContentLoaded", arrancar);
 
 // ============================================
 // 2. FUNCIONES AUXILIARES
@@ -91,7 +109,6 @@ function validateForm(a) {
 
     const userMessage = userMessageInput.value;
     const UserDescripcion = userDesripcionInput.value;
-    const UserDelete = Deleteid.value;
 
     let isValid = true;
 
@@ -148,63 +165,63 @@ function comprobarEliminacion(a) {
 }
 
 
-// Funcion que valida que el usuario este registrado
-function validateId(a) {
+// // Funcion que valida que el usuario este registrado
+// function validateId(a) {
 
-    let isValid = true;
-    const userName = userNameInput.value;
+//     let isValid = true;
+//     const userName = userNameInput.value;
 
-    if (!isValidInput(userName)) {
-        userNameInput.classList.add("form__input--error");
-        userNameError.textContent = "El nombre de usuario no es valido"
-        isValid = false;
-    }
+//     if (!isValidInput(userName)) {
+//         userNameInput.classList.add("form__input--error");
+//         userNameError.textContent = "El nombre de usuario no es valido"
+//         isValid = false;
+//     }
 
-    else {
-        isValid = true
-        userNameInput.classList.remove("form__input--error");
-        userNameError.textContent = ""
-    }
+//     else {
+//         isValid = true
+//         userNameInput.classList.remove("form__input--error");
+//         userNameError.textContent = ""
+//     }
 
-    return isValid;
+//     return isValid;
 
-}
-
-
-
-// Agarra el tiempo actual
-function getCurrentTimestamp() {
-    const now = new Date();
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    };
-    return now.toLocaleDateString('es-ES', options);
-}
+// }
 
 
 
-function updateMessageCount(totalMessages) {
-    // TODO: Implementar actualización del contador
-    // Pista: Usa template literals para crear el texto
-    // Formato: "X mensaje(s)" o "X mensajes"
+// // Agarra el tiempo actual
+// function getCurrentTimestamp() {
+//     const now = new Date();
+//     const options = {
+//         year: 'numeric',
+//         month: 'long',
+//         day: 'numeric',
+//         hour: '2-digit',
+//         minute: '2-digit'
+//     };
+//     return now.toLocaleDateString('es-ES', options);
+// }
 
 
-    messageCount.textContent = `${totalMessages} tarea/s`
-}
+
+// function updateMessageCount(totalMessages) {
+//     // TODO: Implementar actualización del contador
+//     // Pista: Usa template literals para crear el texto
+//     // Formato: "X mensaje(s)" o "X mensajes"
+
+
+//     messageCount.textContent = `${totalMessages} tarea/s`
+// }
 
 /**
  * Oculta el estado vacío (mensaje cuando no hay mensajes)
  */
-function hideEmptyState() {
-    // TODO: Implementar función para ocultar el estado vacío
-    // Pista: Agrega la clase 'hidden' al elemento emptyState
+// function hideEmptyState() {
+//     // TODO: Implementar función para ocultar el estado vacío
+//     // Pista: Agrega la clase 'hidden' al elemento emptyState
 
-    emptyState.classList.add("hidden")
-}
+//     emptyState.classList.add("hidden")
+// }
 
 /**
  * Muestra el estado vacío (mensaje cuando no hay mensajes)
@@ -218,116 +235,111 @@ function showEmptyState() {
 // 3. CREACIÓN DE ELEMENTOS
 // ============================================
 
-const userNameList = document.getElementById('userNameList');
+// 
 
 
-function renderizarDatalist(users) {
-    userNameList.innerHTML = '';
-    const nombresAgregados = new Set();
-    users.forEach(user => {
-        if (!nombresAgregados.has(user.name)) {
-            nombresAgregados.add(user.name);
-            const option = document.createElement('option');
-            option.value = user.name;
-            userNameList.appendChild(option);
-        }
-    });
-}
+// function renderizarDatalist(users) {
+//     userNameList.innerHTML = '';
+//     const nombresAgregados = new Set();
+//     users.forEach(user => {
+//         if (!nombresAgregados.has(user.name)) {
+//             nombresAgregados.add(user.name);
+//             const option = document.createElement('option');
+//             option.value = user.name;
+//             userNameList.appendChild(option);
+//         }
+//     });
+// }
 
-// Para que me muestre los usuarios a los que estoy buscando
-userNameInput.addEventListener('input', () => {
-    const query = userNameInput.value.toLowerCase();
+// // Para que me muestre los usuarios a los que estoy buscando
+// cambio.addEventListener("input", (evento) => {
+//     // Verificamos si el origen del evento fue nuestro input específico
+//     if (evento.target && evento.target.id === "userName") {
+        
+//         userNameInput.addEventListener('input', () => {
+//             const query = userNameInput.value.toLowerCase();
+        
+//             Array.from(UsuariosTableBody.querySelectorAll('tr')).forEach(tr => {
+//                 const nombre = tr.children[1].textContent.toLowerCase();
+//                 if (nombre.includes(query)) {
+//                     tr.style.display = ''; // mostrar
+//                 } else {
+//                     tr.style.display = 'none'; // ocultar
+//                 }
+//             });
+//         });
+//     }
+// });
 
-    Array.from(UsuariosTableBody.querySelectorAll('tr')).forEach(tr => {
-        const nombre = tr.children[1].textContent.toLowerCase();
-        if (nombre.includes(query)) {
-            tr.style.display = ''; // mostrar
-        } else {
-            tr.style.display = 'none'; // ocultar
-        }
-    });
-});
 
 
 
-// Esta funciones es para cargar los usuarios
-function renderizarTabla(users) {
-    UsuariosTableBody.innerHTML = ''; // Se limpia las tablas antes de limpiarla
+// // Esta funciones es para cargar los usuarios
+// function renderizarTabla(users) {
+//     UsuariosTableBody.innerHTML = ''; // Se limpia las tablas antes de limpiarla
 
-    // Crear un Set para trackear nombres ya agregados y evitar duplicados
-    const nombresAgregados = new Set();
+//     // Crear un Set para trackear nombres ya agregados y evitar duplicados
+//     const nombresAgregados = new Set();
 
-    users.forEach(user => {
-        // Solo agregar si el nombre no ha sido agregado antes
-        if (!nombresAgregados.has(user.name)) {
-            nombresAgregados.add(user.name);
+//     users.forEach(user => {
+//         // Solo agregar si el nombre no ha sido agregado antes
+//         if (!nombresAgregados.has(user.name)) {
+//             nombresAgregados.add(user.name);
 
-            const fila = document.createElement('tr')
-            fila.innerHTML = `
-                <td>${user.id}</td>
-                <td>${user.name}</td>
-            `;
-            UsuariosTableBody.appendChild(fila);
-        }
-    })
-}
+//             const fila = document.createElement('tr')
+//             fila.innerHTML = `
+//                 <td>${user.id}</td>
+//                 <td>${user.name}</td>
+//             `;
+//             UsuariosTableBody.appendChild(fila);
+//         }
+//     })
+// }
 
-async function cargarusers() {
-    try {
-        const users = await request('users')
-        console.log('Datos recibidos:', users);
-        renderizarTabla(users);
-        renderizarDatalist(users);
 
-    } catch (error) {
-        console.error('Error completo:', error);
-        alert('Error al cargar los users: ' + error.message)
-    }
-
-}
 
 // funcion que me permite mostrar las tarjetas de los usuarios
-async function createMessageElement(userName) {
-    // TODO: Implementar la creación de un nuevo mensaje
+// async function createMessageElement(userName) {
+//     // TODO: Implementar la creación de un nuevo mensaje
 
-    messagesContainer.innerHTML = "";
-    // PASO 1: Crear el contenedor principal del mensaje
+//     messagesContainer.innerHTML = "";
+//     // PASO 1: Crear el contenedor principal del mensaje
 
-    const fecha = getCurrentTimestamp();
+//     const fecha = getCurrentTimestamp();
 
-    const datosUsuario = await obtenerTareasPorUsuario(userName);
-    // PASO 2: Crear la estructura HTML del mensaje
-    // Puedes usar innerHTML con la siguiente estructura:
+//     const datosUsuario = await obtenerTareasPorUsuario(userName);
+//     // PASO 2: Crear la estructura HTML del mensaje
+//     // Puedes usar innerHTML con la siguiente estructura:
 
-    datosUsuario.forEach(datos => {
-        const div = document.createElement("div");
+//     datosUsuario.forEach(datos => {
+//         const div = document.createElement("div");
 
-        // Asignar la clase 'message-card'
-        div.classList.add("message-card");
-        div.classList.add(`tarea${datos.id}`)
+//         // Asignar la clase 'message-card'
+//         div.classList.add("message-card");
+//         div.classList.add(`tarea${datos.id}`)
 
-        div.innerHTML = `
-            <div class="message-card__header">
-                <div class="message-card__user">
-                    <div class="message-card__avatar">${datos.id}</div>
-                    <span class="message-card__username">${datos.name}</span>
-                </div>
-                <span class="message-card__timestamp">${fecha}</span>
+//         div.innerHTML = `
+//             <div class="message-card__header">
+//                 <div class="message-card__user">
+//                     <div class="message-card__avatar">${datos.id}</div>
+//                     <span class="message-card__username">${datos.name}</span>
+//                 </div>
+//                 <span class="message-card__timestamp">${fecha}</span>
 
-                </div>
-                <div class="message-card__content">${datos.tarea}</div>
-                <div class="message-card__content">${datos.body}</div> 
-        `
+//                 </div>
+//                 <div class="message-card__content">${datos.tarea}</div>
+//                 <div class="message-card__content">${datos.body}</div> 
+//         `
 
-        messagesContainer.appendChild(div);
+//         messagesContainer.appendChild(div);
 
-        totalMessages += 1
+//         totalMessages += 1
 
-        updateMessageCount(totalMessages)
-    })
+//         updateMessageCount(totalMessages)
+//     })
 
-    hideEmptyState();
-}
+//     hideEmptyState();
+// }
 
 async function createTarjetas() {
 
@@ -373,61 +385,59 @@ async function createTarjetas() {
 // 4. MANEJO DE EVENTOS
 // ============================================
 
-async function handleFormSubmit(event) {
-    // TODO: Implementar el manejador del evento submit
+// async function handleFormSubmit() {
+//     // TODO: Implementar el manejador del evento submit
 
-    // PASO 1: Prevenir el comportamiento por defecto del formulario
-    event.preventDefault();
+//     // PASO 2: Validar el formulario
+//     const formularioV = validateId();
 
-    // PASO 2: Validar el formulario
-    const formularioV = validateId();
+//     if (!formularioV) {
+//         alert("Los datos ingresados no son validos")
+//         return
+//     }
 
-    if (!formularioV) {
-        alert("Los datos ingresados no son validos")
-        return
-    }
+//     // PASO 3: Obtener los valores de los campos
+//     const confirmacionUser = await BuscarNombre(userNameInput.value);
 
-    // PASO 3: Obtener los valores de los campos
-    const confirmacionUser = await BuscarNombre(userNameInput.value);
+//     if (!confirmacionUser) {
+//         alert("El usuario no existe")
+//         return
+//     }
+//     else {
+//         alert("el usuario existe");
+//     }
 
-    if (!confirmacionUser) {
-        alert("El usuario no existe")
-        return
-    }
-    else {
-        alert("el usuario existe");
-    }
-
-    //mostrar los campos habilitados
-    conjuntoDatos.classList.add("form__id");
-    aparecerDelete.classList.add("form__id");
-    aparecerUpdate.classList.add("form__id");
+//     //mostrar los campos habilitados
+//     conjuntoDatos?.classList.add("form__id");
+//     aparecerDelete?.classList.add("form__id");
+//     AparecerUpdate?.classList.add("form__id");
     
-    //Mostar boton subir tareas
-    submitBtnTareas.classList.remove("btn--secundary");
-    submitBtnTareas.classList.add("btn--primary");
+//     //Mostar boton subir tareas
+//     submitBtnTareas?.classList.remove("btn--secundary");
+//     submitBtnTareas?.classList.add("btn--primary");
 
-    updateBtn.classList.add("btn--primary");
-    updateBtn.classList.remove("btn--secundary");
+//     updateBtn?.classList.add("btn--primary");
+//     updateBtn?.classList.remove("btn--secundary");
 
-    //Mostar boton eliminar tareas
-    deleteBtn.classList.remove("btn--secundary");
-    deleteBtn.classList.add("btn--primary");
+//     //Mostar boton eliminar tareas
+//     deleteBtn?.classList.remove("btn--secundary");
+//     deleteBtn?.classList.add("btn--primary");
 
-    //mostrar boton resetear formulario
-    resetBtn.classList.remove("btn--secundary");
-    resetBtn.classList.add("btn--primary");
+//     //mostrar boton resetear formulario
+//     resetBtn?.classList.remove("btn--secundary");
+//     resetBtn?.classList.add("btn--primary");
 
-    // Para inabilitar el campo nombre
-    userNameInput.setAttribute("disabled", "true");
-
-    createMessageElement(userNameInput.value, userMessageInput.value);
-
-}
+//     // Para inabilitar el campo nombre
+//     userNameInput.setAttribute("disabled", "true");
+//     console.log(userNameInput);
+//     console.log(userMessageInput);
+    
+    
+//     createMessageElement(userNameInput.value);
+// }
 
 async function AgregarTarjetas(event) {
 
-    event.preventDefault();
 
     const validacionForm = validateForm();
 
@@ -454,7 +464,6 @@ async function AgregarTarjetas(event) {
 
 async function actualizarTarea (event){
 
-    event.preventDefault();
 
     const ValidacionTarea = await BuscarIdTarea(Updateid.value);
     console.log(ValidacionTarea);
@@ -484,8 +493,6 @@ async function actualizarTarea (event){
 
 async function eliminarTarea(event) {
 
-    event.preventDefault();
-
     const validacionForm = comprobarEliminacion();
     console.log(validacionForm);
 
@@ -498,7 +505,7 @@ async function eliminarTarea(event) {
         return
     }
 
-    if (!confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) {
+    if (confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) {
         console.log("Datos Eliminaddos");
     }
     else {
@@ -516,7 +523,7 @@ async function eliminarTarea(event) {
             tareaVisual.remove(); // Esto quita el elemento del HTML sin recargar
         }
 
-        inputIdEliminar.value = "";
+        Deleteid.value = "";
 
         totalMessages--;
     }
@@ -524,9 +531,10 @@ async function eliminarTarea(event) {
     else {
         alert("hubo un error en la eliminacion de los datos")
     }
-
-
 }
+
+
+
 
 // messageForm.reset();    
 
@@ -536,19 +544,57 @@ async function eliminarTarea(event) {
 // ============================================
 
 
-submitBtn.addEventListener("click", handleFormSubmit);
-messageForm.addEventListener("submit", AgregarTarjetas);
 
-updateBtn.addEventListener("click", actualizarTarea);
-deleteBtn.addEventListener("click", eliminarTarea);
-resetBtn.addEventListener("click", (e) => { e.reload();});
+cambio.addEventListener("submit", (evento) => {
+    // Verificamos si el origen del evento fue nuestro input específico
+    if (evento.target && evento.target.id === "messageForm") {
+
+        evento.preventDefault();
+        AgregarTarjetas();
+    }
+});
+
+cambio.addEventListener("click", (evento) => {
+    // Verificamos si el origen del evento fue nuestro input específico
+    if (evento.target && evento.target.id === "resetBtn") {
+     
+        evento.preventDefault();
+        evento.reload();
+    }
+});
+
+
+cambio.addEventListener("click", (evento) => {
+
+    if(evento.target && evento.target.id === "updateBtn"){
+
+        evento.preventDefault();
+        actualizarTarea()
+    }
+
+});
+
+
+cambio.addEventListener("click", (evento) => {
+
+    if(evento.target && evento.target.id === "deleteBtn"){
+
+        evento.preventDefault();
+        eliminarTarea()
+    }
+
+});
+
+
+
+
+
 /**
  * Esta función se ejecuta cuando el DOM está completamente cargado
  */
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ DOM completamente cargado');
     console.log('📝 Aplicación de registro de mensajes iniciada');
-    cargarusers();
     
     // Aquí puedes agregar cualquier inicialización adicional
     // Por ejemplo, cargar mensajes guardados del localStorage

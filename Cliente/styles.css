@@ -114,7 +114,22 @@ body {
     color: var(--color-text-primary);
     background: linear-gradient(135deg, var(--color-primary-lighter) 0%, var(--color-gray-50) 100%);
     min-height: 100vh;
-    padding: var(--spacing-lg);
+}
+
+/* Barra de navegacion */
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 8vh;
+    background-color: var(--color-primary);
+}
+
+.navbar__item{
+    
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--color-surface);
 }
 
 /* ============================================
@@ -506,7 +521,6 @@ tbody tr:nth-child(even) {
    ============================================ */
 
 .container {
-    max-width: 500px;
     margin: 40px auto;
     padding: var(--spacing-xl);
     background: var(--color-surface);
@@ -621,6 +635,14 @@ hr {
     margin: var(--spacing-lg) 0;
     border: none;
     height: 1px;
+}
+
+.message{
+
+    border: 2px solid var(--color-primary-light);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 /* ============================================
    ANIMACIONES
