@@ -1,7 +1,7 @@
 //Las importaciones de las funciones con el json-server
 import { request, updateTarea } from "./helper/index.js"
 import { BuscarNombre, obtenerTareasPorUsuario, BuscarIdTarea, agregarNuevaTarea, eliminarTareaPorId } from "./Peticiones/index.js"
-
+import { enrrutador } from "./router/router.js";
 
 // ============================================
 // 1. SELECCIÓN DE ELEMENTOS DEL DOM
@@ -54,6 +54,9 @@ const messageCount = document.getElementById('messageCount');
 
 // Cuerpo de la tabla para mostrar los usuarios
 const UsuariosTableBody = document.getElementById('UsuariosTableBody');
+
+//Para poder ambiar entre los formularios de la pagina
+
 
 // Variable para llevar el conteo de mensajes
 let totalMessages = 0;
@@ -524,9 +527,10 @@ async function eliminarTarea(event) {
     else {
         alert("hubo un error en la eliminacion de los datos")
     }
-
-
 }
+
+
+
 
 // messageForm.reset();    
 
@@ -542,6 +546,10 @@ messageForm.addEventListener("submit", AgregarTarjetas);
 updateBtn.addEventListener("click", actualizarTarea);
 deleteBtn.addEventListener("click", eliminarTarea);
 resetBtn.addEventListener("click", (e) => { e.reload();});
+
+window.addEventListener("hashchange", )
+
+
 /**
  * Esta función se ejecuta cuando el DOM está completamente cargado
  */
