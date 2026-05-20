@@ -1,12 +1,7 @@
-import { tareasControlador } from "../VistaTarea/TareasControlador.js";
-import { vistaTareas } from "../VistaTarea/VistaTareas.js";
-import { vistaAgregar } from "../VistaAgregar/vistaAgregar.js"
-import { agregarControlador } from "../VistaAgregar/AgregarControlador.js"
-import { vistaEliminar } from "../VistaEliminar/vistaEliminar.js"
-import { eliminarControlador } from "../VistaEliminar/eliminarControlador.js"
-import { vistaActualizar } from "../VistaActualizar/vistaActualizar.js"
-import { actualizarControlador } from "../VistaActualizar/ActualizarControlador.js"
-
+import { tareasControlador, vistaTareas } from "../VistaTarea/index.js"
+import { vistaAgregar, agregarControlador } from "../VistaAgregar/index.js"
+import { eliminarControlador, vistaEliminar } from "../VistaEliminar/index.js"
+import {vistaActualizar, actualizarControlador } from "../VistaActualizar/index.js"
 
 export const rutas = [
   {
