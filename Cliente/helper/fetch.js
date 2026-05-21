@@ -1,11 +1,9 @@
-import { ip } from "./IP.js"
+import { baseUrl } from "@/helper/config.js"
+
 //peticion mostrar
 export const request = async (url) => {
-    const solicitud = await fetch(`http://${ip}:3000/${url}`);
+    const solicitud = await fetch(`${baseUrl}/${url}`);
     const data = await solicitud.json();
     return data;
 };
-
-
-
 

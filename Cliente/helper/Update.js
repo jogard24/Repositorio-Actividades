@@ -8,10 +8,10 @@
     
 //     return await solicitud.json();
 // }
-import { ip } from "./IP.js"
+import { baseUrl } from "@/helper/config.js"
 
 export async function updateTarea(id, actualizacionTarea) {
-    const solicitud = await fetch(`http://${ip}:3000/users/${id}`, {
+    const solicitud = await fetch(`${baseUrl}/users/${id}`, {
         method: 'PATCH',
         body: JSON.stringify({ tarea: actualizacionTarea }),
         headers: { 'Content-type': 'application/json' }

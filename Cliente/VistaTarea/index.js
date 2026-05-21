@@ -1,2 +1,2 @@
-export * from "./TareasControlador";
-export * from "./VistaTareas";
+export { tareasControlador } from "./TareasControlador.js";
+export { vistaTareas } from "./VistaTareas.js";

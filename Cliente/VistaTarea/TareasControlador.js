@@ -1,4 +1,4 @@
-import { request } from "../helper/index.js";
+import { request } from "@/helper/index.js";
 import { tareas } from "./mostrarTareas.js";
 
 export const tareasControlador = async () => {
