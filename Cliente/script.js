@@ -36,9 +36,9 @@ const userDesripcionInput = cambio.querySelector('#UserDescripcion');
 const Deleteid = cambio.querySelector("#Deleteid");
 // const aparecerDelete = cambio.querySelector("#aparecerDelete");
 
-const Updateid = cambio.querySelector("#updateid");
+// const Updateid = cambio.querySelector("#updateid");
 // const AparecerUpdate = cambio.querySelector("#aparecerUpdate");
-const ActualizarT = cambio.querySelector("#ActualizarT");
+// const ActualizarT = cambio.querySelector("#ActualizarT");
 
 // // Botónes de envío
 // // const submitBtn = cambio.querySelector('#submitBtnid');
@@ -462,34 +462,31 @@ async function AgregarTarjetas(event) {
 
 }
 
-async function actualizarTarea (event){
+// async function actualizarTarea (event){
 
 
-    const ValidacionTarea = await BuscarIdTarea(Updateid.value);
-    console.log(ValidacionTarea);
+//     const ValidacionTarea = await BuscarIdTarea(Updateid.value);
+//     console.log(ValidacionTarea);
     
 
-    if (ValidacionTarea){
+//     if (ValidacionTarea){
         
-        alert("el id ingresado es valido")
-    }
-    else {
-        alert("el id no esta asignado a una tarea");
-        return
-    }
+//         alert("el id ingresado es valido")
+//     }
+//     else {
+//         alert("el id no esta asignado a una tarea");
+//         return
+//     }
 
-    const respuesta =await updateTarea(Updateid.value, ActualizarT.value);
+//     const respuesta =await updateTarea(Updateid.value, ActualizarT.value);
 
-    if (respuesta){
-        alert("Se actualizo la tarea");    
-    }
-    else{
-        alert("no se actualizo la tarea")
-    }
-    
-
-
-}
+//     if (respuesta){
+//         alert("Se actualizo la tarea");    
+//     }
+//     else{
+//         alert("no se actualizo la tarea")
+//     }
+// }
 
 async function eliminarTarea(event) {
 
@@ -563,16 +560,6 @@ cambio.addEventListener("click", (evento) => {
     }
 });
 
-
-cambio.addEventListener("click", (evento) => {
-
-    if(evento.target && evento.target.id === "updateBtn"){
-
-        evento.preventDefault();
-        actualizarTarea()
-    }
-
-});
 
 
 cambio.addEventListener("click", (evento) => {
