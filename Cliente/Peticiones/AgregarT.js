@@ -1,4 +1,4 @@
-import { crearTarea } from "../helper/index.js";
+import { crearTarea } from "@/helper/index.js";
 
 export const agregarNuevaTarea = async (nombreUser, tarea, tareaDescrib) => {
 

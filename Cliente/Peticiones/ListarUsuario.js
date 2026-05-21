@@ -1,4 +1,4 @@
-import { request } from "../helper/index.js";
+import { request } from "@/helper/index.js";
 
 export function listarUsuario(){
 

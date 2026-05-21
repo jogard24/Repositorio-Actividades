@@ -1,4 +1,4 @@
-import { request } from "../helper/index.js";
+import { request } from "@/helper/index.js";
 
 export const obtenerTareasPorUsuario = async (idBusqueda) => {
     // JSON-Server filtra automáticamente usando esta URL

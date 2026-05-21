@@ -1,7 +1,7 @@
 //Las importaciones de las funciones con el json-server
-import { request, updateTarea } from "./helper/index.js"
-import { BuscarNombre, obtenerTareasPorUsuario, BuscarIdTarea, agregarNuevaTarea, eliminarTareaPorId } from "./Peticiones/index.js"
-import { enrrutador } from "./router/router.js";
+import { request, updateTarea } from "@/helper/index.js"
+import { BuscarNombre, obtenerTareasPorUsuario, BuscarIdTarea, agregarNuevaTarea, eliminarTareaPorId } from "@/Peticiones/index.js"
+import { enrrutador } from "@/router/router.js";
 
 // ============================================
 // 1. SELECCIÓN DE ELEMENTOS DEL DOM
