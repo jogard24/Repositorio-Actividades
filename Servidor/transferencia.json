@@ -79,7 +79,7 @@
     },
     {
       "name": "Ana Torres",
-      "tarea": "hola como tas",
+      "tarea": "Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "body": "sera",
       "active": false,
       "id": "dHN6_2zNjN4"
@@ -90,13 +90,6 @@
       "body": "Vamos a termina la tarea de nuestro proyecto integrador.",
       "active": false,
       "id": "SfA-jOTr9OM"
-    },
-    {
-      "name": "Ana Torres",
-      "tarea": "Hola",
-      "body": "Estamos revisando nuestro papaya",
-      "active": false,
-      "id": "lM9-bH6bgzU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

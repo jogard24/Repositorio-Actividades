@@ -12,11 +12,14 @@ import { enrrutador } from "@/router/router.js";
  * Usamos getElementById para obtener referencias a los elementos únicos.
  */
 const cambio = document.querySelector(".contenidoP");
+const textoP = document.querySelector("#textoPrincipal");
 
 const arrancar = async () => {
     console.log("Cambios");
     
-  await enrrutador(cambio)
+    await enrrutador(cambio);
+
+    textoP.innerHTML = "Selecciona la funciona ejecutar =D";
 }
 
 
