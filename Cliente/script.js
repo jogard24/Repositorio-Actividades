@@ -23,9 +23,9 @@ const arrancar = async () => {
 //Se buscan los elementos dentro del contenedor principal
 
 // Formularios
-const messageForm = cambio.querySelector('#messageForm');
-const eliminarTares = cambio.querySelector("#deleteForm")
-const actualizarTareas = cambio.querySelector("#updateForm")
+// const messageForm = cambio.querySelector('#messageForm');
+// const eliminarTares = cambio.querySelector("#deleteForm")
+// const actualizarTareas = cambio.querySelector("#updateForm")
 
 // Campos de entrada
 // const userNameInput = cambio.querySelector('#userName');
@@ -33,7 +33,7 @@ const actualizarTareas = cambio.querySelector("#updateForm")
 const userDesripcionInput = cambio.querySelector('#UserDescripcion');
 // const conjuntoDatos = cambio.querySelector(".form__group");
 
-const Deleteid = cambio.querySelector("#Deleteid");
+// const Deleteid = cambio.querySelector("#Deleteid");
 // const aparecerDelete = cambio.querySelector("#aparecerDelete");
 
 // const Updateid = cambio.querySelector("#updateid");
@@ -142,27 +142,27 @@ function validateForm(a) {
 }
 
 //validar que el campo de eliminar no este vacio
-function comprobarEliminacion(a) {
+// function comprobarEliminacion(a) {
 
-    //se obtiene el valor de la eliminacion
-    const UserDelete = Deleteid.value;
+//     //se obtiene el valor de la eliminacion
+//     const UserDelete = Deleteid.value;
 
-    let isValid = true;
+//     let isValid = true;
 
-    if (!isValidInput(UserDelete)) {
-        Deleteid.classList.add("form__input--error");
-        idDeleteError.textContent = "la descripcion no debe estar vacia"
-        isValid = false;
-    }
+//     if (!isValidInput(UserDelete)) {
+//         Deleteid.classList.add("form__input--error");
+//         idDeleteError.textContent = "la descripcion no debe estar vacia"
+//         isValid = false;
+//     }
 
-    else {
-        isValid = true;
-        Deleteid.classList.remove("form__input--error");
-        idDeleteError.textContent = "";
-    }
+//     else {
+//         isValid = true;
+//         Deleteid.classList.remove("form__input--error");
+//         idDeleteError.textContent = "";
+//     }
 
-    return isValid
-}
+//     return isValid
+// }
 
 
 // // Funcion que valida que el usuario este registrado
@@ -488,47 +488,47 @@ async function AgregarTarjetas(event) {
 //     }
 // }
 
-async function eliminarTarea(event) {
+// async function eliminarTarea(event) {
 
-    const validacionForm = comprobarEliminacion();
-    console.log(validacionForm);
+//     const validacionForm = comprobarEliminacion();
+//     console.log(validacionForm);
 
 
-    if (validacionForm) {
-        alert("los datos ingresados son validos")
-    }
-    else {
-        alert("los datos ingresados no son permitidos")
-        return
-    }
+//     if (validacionForm) {
+//         alert("los datos ingresados son validos")
+//     }
+//     else {
+//         alert("los datos ingresados no son permitidos")
+//         return
+//     }
 
-    if (confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) {
-        console.log("Datos Eliminaddos");
-    }
-    else {
-        console.log("los datos no fueron eliminados");
-        return;
-    }
+//     if (confirm(`¿Estás seguro de que quieres eliminar la tarea con ID ${Deleteid.value}?`)) {
+//         console.log("Datos Eliminaddos");
+//     }
+//     else {
+//         console.log("los datos no fueron eliminados");
+//         return;
+//     }
 
-    const eliminar = await eliminarTareaPorId(Deleteid.value);
+//     const eliminar = await eliminarTareaPorId(Deleteid.value);
 
-    if (eliminar) {
-        alert("Se eliminaron los datos correctamente");
+//     if (eliminar) {
+//         alert("Se eliminaron los datos correctamente");
 
-        const tareaVisual = document.querySelector(`.tarea${Deleteid.value}`);
-        if (tareaVisual) {
-            tareaVisual.remove(); // Esto quita el elemento del HTML sin recargar
-        }
+//         const tareaVisual = document.querySelector(`.tarea${Deleteid.value}`);
+//         if (tareaVisual) {
+//             tareaVisual.remove(); // Esto quita el elemento del HTML sin recargar
+//         }
 
-        Deleteid.value = "";
+//         Deleteid.value = "";
 
-        totalMessages--;
-    }
+//         totalMessages--;
+//     }
 
-    else {
-        alert("hubo un error en la eliminacion de los datos")
-    }
-}
+//     else {
+//         alert("hubo un error en la eliminacion de los datos")
+//     }
+// }
 
 
 
@@ -562,15 +562,15 @@ cambio.addEventListener("click", (evento) => {
 
 
 
-cambio.addEventListener("click", (evento) => {
+// cambio.addEventListener("click", (evento) => {
 
-    if(evento.target && evento.target.id === "deleteBtn"){
+//     if(evento.target && evento.target.id === "deleteBtn"){
 
-        evento.preventDefault();
-        eliminarTarea()
-    }
+//         evento.preventDefault();
+//         eliminarTarea()
+//     }
 
-});
+// });
 
 
 
